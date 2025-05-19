@@ -1,5 +1,812 @@
-<html>
-    <body>
-    <p><a href="www.uitshare.com">网站开发中，欢迎关注</a>
-    </body>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2025年520祝福 - 轻煮岁月慢煮茶</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "SimSun", sans-serif;
+            background-color: #f7f5f0;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1586004296324-9a0635f86956?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center center/cover no-repeat;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        .container {
+            text-align: center;
+            padding: 1.8rem 1.5rem 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 95%;
+            position: relative;
+            overflow: hidden;
+            max-height: none;
+            overflow-y: visible;
+        }
+        .scroll-container {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 0 5px;
+            margin: 0 -5px;
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.2rem;
+            color: #b83955;
+            font-weight: normal;
+            letter-spacing: 0.1em;
+        }
+        .wish {
+            font-size: 2rem;
+            margin: 1.5rem 0;
+            line-height: 1.8;
+            color: #333;
+            font-weight: normal;
+            position: relative;
+            display: inline-block;
+        }
+        .wish::before,
+        .wish::after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: #b83955;
+            top: 50%;
+        }
+        .wish::before {
+            left: -80px;
+        }
+        .wish::after {
+            right: -80px;
+        }
+        .calligraphy {
+            font-family: "KaiTi", "STKaiti", serif;
+            font-size: 3rem;
+            margin-top: 1.8rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+            color: #b83955;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .flowers {
+            position: fixed; /* 改为fixed定位 */
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+        footer {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #777;
+            padding-bottom: 0.8rem;
+        }
+        .teacup {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            margin: 0.8rem auto 0;
+        }
+        .teacup::before {
+            content: "🍵";
+            font-size: 3rem;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .calligraphy {
+                font-size: 2.2rem;
+            }
+            .wish::before,
+            .wish::after {
+                width: 30px;
+            }
+            .wish::before {
+                left: -40px;
+            }
+            .wish::after {
+                right: -40px;
+            }
+        }
+        .petal {
+            position: absolute;
+            background-color: #f7d3e0;
+            border-radius: 50% 0 50% 0;
+            transform: rotate(45deg);
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        /* 熊猫和小棕熊样式 */
+        .animals-container {
+            display: flex;
+            justify-content: center;
+            margin: 1.2rem auto 2rem; /* 增加底部外边距给名称腾出空间 */
+            position: relative;
+            height: 110px;
+        }
+        
+        .panda, .bear {
+            width: 80px;
+            height: 120px;
+            position: relative;
+            margin: 0 20px;
+            text-align: center;
+        }
+        
+        .animal-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: contain;
+            background-color: white;
+            margin-bottom: 5px;
+            border: 2px solid #b83955;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 3px;
+        }
+        
+        .animal-name {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #555;
+            background-color: rgba(255, 255, 255, 0.7); /* 添加半透明背景防止遮挡 */
+            padding: 2px 8px;
+            border-radius: 10px;
+            z-index: 3; /* 确保在其他元素上方 */
+            font-weight: bold;
+        }
+        
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            animation: heartbeat 1.5s ease infinite;
+        }
+        
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 25px;
+            background-color: #b83955;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .heart::before {
+            left: 0;
+            transform: rotate(-45deg);
+            transform-origin: 100% 100%;
+        }
+        
+        .heart::after {
+            right: 0;
+            transform: rotate(45deg);
+            transform-origin: 0 100%;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: translate(-50%, -50%) scale(0.8); }
+            50% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-50%, -50%) scale(0.8); }
+        }
+        
+        /* 对话框样式 */
+        .dialogue-container {
+            max-width: 600px;
+            margin: 1.2rem auto 0;
+            padding: 0.8rem;
+            position: relative;
+            background-color: rgba(245, 245, 245, 0.9);
+            border-radius: 10px;
+            border: 1px solid rgba(184, 57, 85, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .dialogue-title {
+            text-align: center;
+            margin-bottom: 0.8rem;
+            color: #b83955;
+            font-size: 1.2rem;
+            font-weight: normal;
+            position: relative;
+        }
+        
+        .dialogue-title::before,
+        .dialogue-title::after {
+            content: "❀";
+            color: #b83955;
+            margin: 0 5px;
+            font-size: 0.9rem;
+        }
+        
+        .dialogue {
+            margin-bottom: 1rem;
+            position: relative;
+            display: flex;
+            max-width: 100%;
+            align-items: flex-start;
+        }
+        
+        .dialogue:last-child {
+            margin-bottom: 0.2rem;
+        }
+        
+        .dialogue-bubble {
+            padding: 0.6rem 0.8rem;
+            border-radius: 5px;
+            max-width: 80%;
+            position: relative;
+            margin-bottom: 0.3rem;
+            animation: fadeIn 0.5s ease-out;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            margin: 0 8px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: white;
+            border-radius: 5px;
+            padding: 2px;
+        }
+        
+        .dialogue.left {
+            justify-content: flex-start;
+        }
+        
+        .dialogue.right {
+            justify-content: flex-end;
+        }
+        
+        .dialogue.left .dialogue-bubble {
+            background-color: #fff;
+            color: #333;
+            margin-left: 0;
+            border-radius: 0 10px 10px 10px;
+        }
+        
+        .dialogue.right .dialogue-bubble {
+            background-color: #95EC69;
+            color: #333;
+            margin-right: 0;
+            border-radius: 10px 0 10px 10px;
+        }
+        
+        .dialogue.left .dialogue-bubble:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 12px;
+            border-style: solid;
+            border-width: 8px 8px 0 0;
+            border-color: transparent #fff transparent transparent;
+        }
+        
+        .dialogue.right .dialogue-bubble:before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 12px;
+            border-style: solid;
+            border-width: 0 8px 8px 0;
+            border-color: transparent transparent #95EC69 transparent;
+        }
+        
+        .dialogue-name {
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+            color: #666;
+            display: none; /* 隐藏名称，因为有头像 */
+        }
+        
+        .date-divider {
+            text-align: center;
+            margin: 15px 0;
+            position: relative;
+            color: #999;
+            font-size: 0.8rem;
+        }
+        
+        .date-divider span {
+            background-color: rgba(245, 245, 245, 0.9);
+            padding: 0 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .date-divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.08);
+            z-index: 0;
+        }
+        
+        .poem-quote {
+            font-family: "KaiTi", "STKaiti", serif;
+            font-size: 1rem;
+            color: #666;
+            margin: 1.2rem 0;
+            padding: 0.5rem 1rem;
+            border-left: 3px solid #b83955;
+            background-color: rgba(255, 255, 255, 0.5);
+            text-align: left;
+            font-style: italic;
+        }
+        
+        /* 边角装饰元素样式 */
+        .border-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            border: 1px solid rgba(184, 57, 85, 0.3);
+        }
+        
+        /* 四个角落的装饰 */
+        .container-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: #b83955;
+            border-style: solid;
+            z-index: 5;
+            pointer-events: none;
+        }
+        
+        /* 左上角 */
+        .corner-top-left {
+            top: 5px;
+            left: 5px;
+            border-width: 2px 0 0 2px;
+        }
+        
+        /* 右上角 */
+        .corner-top-right {
+            top: 5px;
+            right: 5px;
+            border-width: 2px 2px 0 0;
+        }
+        
+        /* 左下角 */
+        .corner-bottom-left {
+            bottom: 5px;
+            left: 5px;
+            border-width: 0 0 2px 2px;
+        }
+        
+        /* 右下角 */
+        .corner-bottom-right {
+            bottom: 5px;
+            right: 5px;
+            border-width: 0 2px 2px 0;
+        }
+        
+        /* 适配苹果手机尺寸 */
+        @media screen and (max-width: 430px) { /* iPhone 14 Pro Max 宽度 */
+            .container {
+                padding: 1.2rem 0.8rem 0.8rem;
+                width: 98%;
+            }
+            
+            /* 调整四个角落的装饰尺寸 */
+            .container-corner {
+                width: 15px;
+                height: 15px;
+            }
+            
+            .scroll-container {
+                max-height: 75vh; /* 稍微减小高度以确保手机屏幕上完全显示 */
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .wish {
+                font-size: 1.4rem;
+                margin: 1.2rem 0;
+            }
+            
+            .wish::before, .wish::after {
+                width: 20px;
+            }
+            
+            .wish::before {
+                left: -25px;
+            }
+            
+            .wish::after {
+                right: -25px;
+            }
+            
+            .dialogue-bubble {
+                padding: 0.5rem 0.7rem;
+                font-size: 0.9rem;
+            }
+            
+            .calligraphy {
+                font-size: 2rem;
+                margin: 1.5rem 0 1rem;
+            }
+            
+            .teacup {
+                margin: 0.6rem auto 0;
+            }
+            
+            .animals-container {
+                transform: scale(0.8);
+                margin: 0.8rem auto 1.8rem; /* 调整移动端底部边距 */
+                height: 100px;
+            }
+            
+            .animal-name {
+                font-size: 12px; /* 移动端字体稍小 */
+                bottom: -18px; /* 调整位置 */
+            }
+            
+            .poem-quote {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+                margin: 1rem 0;
+            }
+            
+            .dialogue-container {
+                padding: 0.7rem;
+                margin-top: 0.8rem;
+            }
+        }
+        
+        @media screen and (max-width: 375px) { /* iPhone SE/8 宽度 */
+            .container {
+                padding: 0.8rem 0.6rem 0.6rem;
+            }
+            
+            /* 进一步缩小边角装饰 */
+            .container-corner {
+                width: 12px;
+                height: 12px;
+            }
+            
+            h1 {
+                font-size: 1.4rem;
+            }
+            
+            .wish {
+                font-size: 1.2rem;
+            }
+            
+            .calligraphy {
+                font-size: 1.8rem;
+            }
+            
+            .animals-container {
+                transform: scale(0.7);
+                height: 90px;
+                margin-bottom: 1.6rem; /* 稍微减小底部边距 */
+            }
+            
+            .animal-name {
+                bottom: -16px; /* 进一步调整位置 */
+                padding: 1px 4px; /* 减小内边距 */
+            }
+            
+            .dialogue-container {
+                padding: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="mountain-bg"></div>
+    <div class="ink-decoration"></div>
+    <div class="flowers" id="flowers"></div>
+    
+    <div class="container">
+        <div class="border-decoration"></div>
+        <div class="container-corner corner-top-left"></div>
+        <div class="container-corner corner-top-right"></div>
+        <div class="container-corner corner-bottom-left"></div>
+        <div class="container-corner corner-bottom-right"></div>
+        
+        <div class="scroll-container">
+            <h1>2025年520 · 爱的祝福</h1>
+            <div class="wish">相守一生，相伴到老</div>
+            
+            <div class="animals-container">
+                <div class="panda">
+                    <img src="images/panda.png" alt="一二" class="animal-img">
+                    <div class="animal-name">一二</div>
+                </div>
+                
+                <div class="heart"></div>
+                
+                <div class="bear">
+                    <img src="images/bear.png" alt="布布" class="animal-img">
+                    <div class="animal-name">布布</div>
+                </div>
+            </div>
+            
+            <!-- 对话框部分 -->
+            <div class="dialogue-container">
+                <div class="dialogue-title">一二与布布的微信对话</div>
+                
+                <!-- 第一天 -->
+                <div class="date-divider">
+                    <span>2025年5月18日 星期日</span>
+                </div>
+                
+                <div class="dialogue left">
+                    <div class="avatar">
+                        <img src="images/bear.png" alt="布布" class="avatar-img">
+                    </div>
+                    <div class="dialogue-bubble">
+                        <div class="dialogue-name">布布</div>
+                        今天正常下班吗？
+                    </div>
+                </div>
+                
+                <div class="dialogue right">
+                    <div class="dialogue-bubble">
+                        <div class="dialogue-name">一二</div>
+                        对呀。
+                    </div>
+                    <div class="avatar">
+                        <img src="images/panda.png" alt="一二" class="avatar-img">
+                    </div>
+                </div>
+                
+                <div class="dialogue left">
+                    <div class="avatar">
+                        <img src="images/bear.png" alt="布布" class="avatar-img">
+                    </div>
+                    <div class="dialogue-bubble">
+                        <div class="dialogue-name">布布</div>
+                        今晚凉拌黄瓜。
+                    </div>
+                </div>
+                
+                <!-- 第二天 -->
+                <div class="date-divider">
+                    <span>2025年5月19日 星期一</span>
+                </div>
+                
+                <div class="dialogue left">
+                    <div class="avatar">
+                        <img src="images/bear.png" alt="布布" class="avatar-img">
+                    </div>
+                    <div class="dialogue-bubble">
+                        <div class="dialogue-name">布布</div>
+                        今天按点下班吗？
+                    </div>
+                </div>
+                
+                <div class="dialogue right">
+                    <div class="dialogue-bubble">
+                        <div class="dialogue-name">一二</div>
+                        接，免得她做错车。
+                    </div>
+                    <div class="avatar">
+                        <img src="images/panda.png" alt="一二" class="avatar-img">
+                    </div>
+                </div>
+                
+                <!-- 第三天 -->
+                <div class="date-divider">
+                    <span>2025年5月20日 星期二</span>
+                </div>
+                
+                <div class="dialogue left">
+                    <div class="avatar">
+                        <img src="images/bear.png" alt="布布" class="avatar-img">
+                    </div>
+                    <div class="dialogue-bubble">
+                        <div class="dialogue-name">布布</div>
+                        在吗在吗？
+                    </div>
+                </div>
+                
+                <div class="dialogue right">
+                    <div class="dialogue-bubble">
+                        <div class="dialogue-name">一二</div>
+                        忙，别闹。
+                    </div>
+                    <div class="avatar">
+                        <img src="images/panda.png" alt="一二" class="avatar-img">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="poem-quote">
+                "善良活泼如一二，安静温和如布布，<br>
+                一段缘分千里牵，两颗心灵共舞步。<br>
+                熊猫棕熊情相依，江南烟雨诉衷肠。"
+            </div>
+            
+            <div class="calligraphy">轻煮岁月慢煮茶</div>
+            <div class="teacup"></div>
+            
+            <footer>
+                <span class="tea-decoration"></span>
+                情满五月 · 爱在2025
+                <span class="tea-decoration"></span>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        // 创建漂浮的花瓣效果
+        function createPetals() {
+            const flowersContainer = document.getElementById('flowers');
+            const containerWidth = window.innerWidth;
+            const containerHeight = window.innerHeight;
+            
+            // 创建30个花瓣
+            for (let i = 0; i < 30; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                
+                // 随机大小
+                const size = Math.random() * 20 + 10;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size}px`;
+                
+                // 随机位置
+                petal.style.left = `${Math.random() * containerWidth}px`;
+                petal.style.top = `${Math.random() * containerHeight}px`;
+                
+                // 随机颜色
+                const hue = 350 + Math.random() * 40; // 粉红色到浅紫色范围
+                const saturation = 60 + Math.random() * 40;
+                const lightness = 70 + Math.random() * 20;
+                petal.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                
+                // 随机旋转
+                petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                // 添加到容器
+                flowersContainer.appendChild(petal);
+                
+                // 动画
+                animatePetal(petal, containerWidth, containerHeight);
+            }
+        }
+        
+        // 花瓣动画
+        function animatePetal(petal, maxWidth, maxHeight) {
+            // 初始位置
+            let x = parseFloat(petal.style.left);
+            let y = parseFloat(petal.style.top);
+            
+            // 随机速度
+            const speedX = Math.random() * 0.5 - 0.25;
+            const speedY = Math.random() * 0.5 - 0.1;
+            const rotateSpeed = Math.random() * 0.5 - 0.25;
+            let rotation = Math.random() * 360;
+            
+            function move() {
+                x += speedX;
+                y += speedY;
+                rotation += rotateSpeed;
+                
+                // 边界检查
+                if (x > maxWidth) x = 0;
+                if (x < 0) x = maxWidth;
+                if (y > maxHeight) y = 0;
+                if (y < 0) y = maxHeight;
+                
+                // 应用新位置
+                petal.style.left = `${x}px`;
+                petal.style.top = `${y}px`;
+                petal.style.transform = `rotate(${rotation}deg)`;
+                
+                requestAnimationFrame(move);
+            }
+            
+            move();
+        }
+        
+        // 页面加载完成后执行
+        window.addEventListener('load', () => {
+            createPetals();
+            
+            // 文字渐入效果
+            const calligraphy = document.querySelector('.calligraphy');
+            const text = calligraphy.textContent;
+            calligraphy.textContent = '';
+            
+            for (let i = 0; i < text.length; i++) {
+                const span = document.createElement('span');
+                span.textContent = text[i];
+                span.style.opacity = '0';
+                span.style.transition = 'opacity 0.5s ease';
+                span.style.transitionDelay = `${i * 0.2}s`;
+                calligraphy.appendChild(span);
+                
+                setTimeout(() => {
+                    span.style.opacity = '1';
+                }, 100);
+            }
+            
+            // 为对话气泡添加动画效果
+            const dialogues = document.querySelectorAll('.dialogue');
+            dialogues.forEach((dialogue, index) => {
+                dialogue.style.opacity = '0';
+                dialogue.style.transform = 'translateY(20px)';
+                dialogue.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                dialogue.style.transitionDelay = `${index * 0.3}s`;
+                
+                setTimeout(() => {
+                    dialogue.style.opacity = '1';
+                    dialogue.style.transform = 'translateY(0)';
+                }, 500);
+            });
+        });
+    </script>
+    
+    <!-- 引入额外的动画效果 -->
+    <script src="animation.js"></script>
+</body>
 </html>
