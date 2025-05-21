@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2025年520祝福 - 轻煮岁月慢煮茶</title>
-    <link rel="stylesheet" href="style.css">
+    <title>布布安慰一二 - 温暖时光</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +12,7 @@
         }
         body {
             font-family: "Microsoft YaHei", "SimSun", sans-serif;
-            background-color: #f7f5f0;
+            background-color: #f8f6f2;
             color: #333;
             height: 100vh;
             display: flex;
@@ -29,225 +28,137 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1586004296324-9a0635f86956?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center center/cover no-repeat;
-            opacity: 0.3;
+            background: url('https://images.unsplash.com/photo-1607025952930-da2ac6748e7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center center/cover no-repeat;
+            opacity: 0.2;
             z-index: -1;
+        }
+        .rain {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .raindrop {
+            position: absolute;
+            width: 2px;
+            background-color: rgba(120, 160, 180, 0.5);
+            border-radius: 50%;
         }
         .container {
             text-align: center;
-            padding: 1.8rem 1.5rem 1rem;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem 1.5rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             max-width: 800px;
             width: 95%;
             position: relative;
             overflow: hidden;
-            max-height: none;
-            overflow-y: visible;
         }
         .scroll-container {
             max-height: 80vh;
             overflow-y: auto;
-            padding: 0 5px;
-            margin: 0 -5px;
+            padding: 0 10px;
             position: relative;
             z-index: 2;
         }
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1.2rem;
-            color: #b83955;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #5a7d9a;
             font-weight: normal;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
         }
-        .wish {
-            font-size: 2rem;
-            margin: 1.5rem 0;
-            line-height: 1.8;
-            color: #333;
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #789;
             font-weight: normal;
-            position: relative;
-            display: inline-block;
-        }
-        .wish::before,
-        .wish::after {
-            content: "";
-            position: absolute;
-            width: 60px;
-            height: 2px;
-            background-color: #b83955;
-            top: 50%;
-        }
-        .wish::before {
-            left: -80px;
-        }
-        .wish::after {
-            right: -80px;
-        }
-        .calligraphy {
-            font-family: "KaiTi", "STKaiti", serif;
-            font-size: 3rem;
-            margin-top: 1.8rem;
-            margin-bottom: 1.2rem;
-            line-height: 1.5;
-            color: #b83955;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-        .flowers {
-            position: fixed; /* 改为fixed定位 */
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            top: 0;
-            left: 0;
-        }
-        footer {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #777;
-            padding-bottom: 0.8rem;
-        }
-        .teacup {
-            width: 80px;
-            height: 80px;
-            position: relative;
-            margin: 0.8rem auto 0;
-        }
-        .teacup::before {
-            content: "🍵";
-            font-size: 3rem;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .calligraphy {
-                font-size: 2.2rem;
-            }
-            .wish::before,
-            .wish::after {
-                width: 30px;
-            }
-            .wish::before {
-                left: -40px;
-            }
-            .wish::after {
-                right: -40px;
-            }
-        }
-        .petal {
-            position: absolute;
-            background-color: #f7d3e0;
-            border-radius: 50% 0 50% 0;
-            transform: rotate(45deg);
-            opacity: 0.7;
-            z-index: -1;
         }
         
         /* 熊猫和小棕熊样式 */
         .animals-container {
             display: flex;
             justify-content: center;
-            margin: 1.2rem auto 2rem; /* 增加底部外边距给名称腾出空间 */
+            margin: 1rem auto 2rem;
             position: relative;
-            height: 110px;
+            height: 130px;
         }
         
         .panda, .bear {
-            width: 80px;
-            height: 120px;
             position: relative;
-            margin: 0 20px;
+            margin: 0 15px;
             text-align: center;
         }
         
+        .bear {
+            z-index: 2;
+            transform: translateY(-10px);
+        }
+        
         .animal-img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
+            width: 100px;
+            height: 100px;
             object-fit: contain;
-            background-color: white;
-            margin-bottom: 5px;
-            border: 2px solid #b83955;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 3px;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+        
+        .panda .animal-img {
+            transform: translateY(10px) rotate(-5deg);
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)) grayscale(0.2);
+        }
+        
+        .bear .animal-img {
+            transform: translateX(-5px);
+        }
+        
+        .bear-arm {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background-color: #a67c52;
+            border-radius: 10px;
+            top: 40px;
+            left: 85px;
+            transform: rotate(20deg);
+            z-index: 1;
         }
         
         .animal-name {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 14px;
+            font-size: 16px;
             color: #555;
-            background-color: rgba(255, 255, 255, 0.7); /* 添加半透明背景防止遮挡 */
-            padding: 2px 8px;
-            border-radius: 10px;
-            z-index: 3; /* 确保在其他元素上方 */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 3px 10px;
+            border-radius: 15px;
+            z-index: 3;
             font-weight: bold;
+            display: inline-block;
         }
         
-        .heart {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30px;
-            height: 30px;
-            background-color: transparent;
-            animation: heartbeat 1.5s ease infinite;
-        }
-        
-        .heart::before, .heart::after {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 25px;
-            background-color: #b83955;
-            border-radius: 15px 15px 0 0;
-        }
-        
-        .heart::before {
-            left: 0;
-            transform: rotate(-45deg);
-            transform-origin: 100% 100%;
-        }
-        
-        .heart::after {
-            right: 0;
-            transform: rotate(45deg);
-            transform-origin: 0 100%;
-        }
-        
-        @keyframes heartbeat {
-            0% { transform: translate(-50%, -50%) scale(0.8); }
-            50% { transform: translate(-50%, -50%) scale(1); }
-            100% { transform: translate(-50%, -50%) scale(0.8); }
+        .panda .animal-name {
+            color: #666;
         }
         
         /* 对话框样式 */
         .dialogue-container {
             max-width: 600px;
-            margin: 1.2rem auto 0;
-            padding: 0.8rem;
+            margin: 0.5rem auto 1.5rem;
+            padding: 1rem;
             position: relative;
             background-color: rgba(245, 245, 245, 0.9);
-            border-radius: 10px;
-            border: 1px solid rgba(184, 57, 85, 0.2);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(200, 200, 200, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
         
         .dialogue-title {
             text-align: center;
-            margin-bottom: 0.8rem;
-            color: #b83955;
+            margin-bottom: 1rem;
+            color: #5a7d9a;
             font-size: 1.2rem;
             font-weight: normal;
             position: relative;
@@ -255,14 +166,14 @@
         
         .dialogue-title::before,
         .dialogue-title::after {
-            content: "❀";
-            color: #b83955;
-            margin: 0 5px;
+            content: "☂";
+            color: #5a7d9a;
+            margin: 0 8px;
             font-size: 0.9rem;
         }
         
         .dialogue {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             position: relative;
             display: flex;
             max-width: 100%;
@@ -274,33 +185,35 @@
         }
         
         .dialogue-bubble {
-            padding: 0.6rem 0.8rem;
-            border-radius: 5px;
+            padding: 0.8rem 1rem;
+            border-radius: 15px;
             max-width: 80%;
             position: relative;
             margin-bottom: 0.3rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            font-size: 1rem;
+            line-height: 1.5;
             animation: fadeIn 0.5s ease-out;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            font-size: 0.95rem;
-            line-height: 1.4;
         }
         
         .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 5px;
-            margin: 0 8px;
-            position: relative;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin: 0 10px;
             overflow: hidden;
+            position: relative;
             flex-shrink: 0;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         .avatar-img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            background-color: white;
-            border-radius: 5px;
+            border-radius: 50%;
+            background-color: #fff;
             padding: 2px;
         }
         
@@ -313,57 +226,81 @@
         }
         
         .dialogue.left .dialogue-bubble {
-            background-color: #fff;
+            background-color: #fffcf9;
             color: #333;
             margin-left: 0;
-            border-radius: 0 10px 10px 10px;
+            border-radius: 0 15px 15px 15px;
+            border-left: 3px solid #a67c52;
         }
         
         .dialogue.right .dialogue-bubble {
-            background-color: #95EC69;
+            background-color: #e9f5ff;
             color: #333;
             margin-right: 0;
-            border-radius: 10px 0 10px 10px;
+            border-radius: 15px 0 15px 15px;
+            border-right: 3px solid #5a7d9a;
         }
         
         .dialogue.left .dialogue-bubble:before {
             content: '';
             position: absolute;
             left: -8px;
-            top: 12px;
+            top: 15px;
             border-style: solid;
             border-width: 8px 8px 0 0;
-            border-color: transparent #fff transparent transparent;
+            border-color: transparent #fffcf9 transparent transparent;
         }
         
         .dialogue.right .dialogue-bubble:before {
             content: '';
             position: absolute;
             right: -8px;
-            top: 12px;
+            top: 15px;
             border-style: solid;
             border-width: 0 8px 8px 0;
-            border-color: transparent transparent #95EC69 transparent;
+            border-color: transparent transparent #e9f5ff transparent;
         }
         
-        .dialogue-name {
-            font-size: 0.8rem;
-            margin-bottom: 0.3rem;
-            color: #666;
-            display: none; /* 隐藏名称，因为有头像 */
+        .thinking-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 0;
+        }
+        
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #aaa;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .dot:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        .dot:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
         
         .date-divider {
             text-align: center;
-            margin: 15px 0;
+            margin: 20px 0;
             position: relative;
-            color: #999;
-            font-size: 0.8rem;
+            color: #789;
+            font-size: 0.9rem;
         }
         
         .date-divider span {
             background-color: rgba(245, 245, 245, 0.9);
-            padding: 0 10px;
+            padding: 0 15px;
             position: relative;
             z-index: 1;
         }
@@ -375,20 +312,70 @@
             left: 0;
             width: 100%;
             height: 1px;
-            background-color: rgba(0, 0, 0, 0.08);
+            background-color: rgba(120, 136, 153, 0.2);
             z-index: 0;
         }
         
-        .poem-quote {
+        .mood-indicator {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .mood-icon {
+            font-size: 1.2rem;
+            margin-right: 5px;
+        }
+        
+        .sad { color: #5a7d9a; }
+        
+        .message-time {
+            font-size: 0.7rem;
+            color: #999;
+            text-align: center;
+            margin-top: 5px;
+        }
+        
+        .quote {
             font-family: "KaiTi", "STKaiti", serif;
-            font-size: 1rem;
-            color: #666;
-            margin: 1.2rem 0;
-            padding: 0.5rem 1rem;
-            border-left: 3px solid #b83955;
-            background-color: rgba(255, 255, 255, 0.5);
-            text-align: left;
+            font-size: 1.1rem;
+            color: #5a7d9a;
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            text-align: center;
             font-style: italic;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            line-height: 1.6;
+        }
+        
+        footer {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #789;
+            padding-bottom: 1rem;
+        }
+        
+        .weather-icon {
+            font-size: 1.5rem;
+            margin: 0 3px;
+            vertical-align: middle;
+        }
+        
+        /* 雨伞效果 */
+        .umbrella {
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.15;
+            transform: rotate(-10deg);
+            pointer-events: none;
+            z-index: 1;
         }
         
         /* 边角装饰元素样式 */
@@ -400,180 +387,92 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            border: 1px solid rgba(184, 57, 85, 0.3);
+            border: 1px solid rgba(90, 125, 154, 0.2);
+            border-radius: 14px;
         }
         
-        /* 四个角落的装饰 */
-        .container-corner {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-color: #b83955;
-            border-style: solid;
-            z-index: 5;
-            pointer-events: none;
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* 左上角 */
-        .corner-top-left {
-            top: 5px;
-            left: 5px;
-            border-width: 2px 0 0 2px;
+        @keyframes rainAnimation {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
         }
         
-        /* 右上角 */
-        .corner-top-right {
-            top: 5px;
-            right: 5px;
-            border-width: 2px 2px 0 0;
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+            .dialogue-bubble {
+                font-size: 0.95rem;
+                padding: 0.7rem 0.9rem;
+            }
         }
         
-        /* 左下角 */
-        .corner-bottom-left {
-            bottom: 5px;
-            left: 5px;
-            border-width: 0 0 2px 2px;
-        }
-        
-        /* 右下角 */
-        .corner-bottom-right {
-            bottom: 5px;
-            right: 5px;
-            border-width: 0 2px 2px 0;
-        }
-        
-        /* 适配苹果手机尺寸 */
-        @media screen and (max-width: 430px) { /* iPhone 14 Pro Max 宽度 */
+        @media screen and (max-width: 430px) { 
             .container {
-                padding: 1.2rem 0.8rem 0.8rem;
-                width: 98%;
-            }
-            
-            /* 调整四个角落的装饰尺寸 */
-            .container-corner {
-                width: 15px;
-                height: 15px;
-            }
-            
-            .scroll-container {
-                max-height: 75vh; /* 稍微减小高度以确保手机屏幕上完全显示 */
+                padding: 1.5rem 1rem 1rem;
+                width: 95%;
             }
             
             h1 {
-                font-size: 1.6rem;
-                margin-bottom: 0.8rem;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
             }
             
-            .wish {
-                font-size: 1.4rem;
-                margin: 1.2rem 0;
-            }
-            
-            .wish::before, .wish::after {
-                width: 20px;
-            }
-            
-            .wish::before {
-                left: -25px;
-            }
-            
-            .wish::after {
-                right: -25px;
-            }
-            
-            .dialogue-bubble {
-                padding: 0.5rem 0.7rem;
+            .subtitle {
                 font-size: 0.9rem;
-            }
-            
-            .calligraphy {
-                font-size: 2rem;
-                margin: 1.5rem 0 1rem;
-            }
-            
-            .teacup {
-                margin: 0.6rem auto 0;
+                margin-bottom: 1.5rem;
             }
             
             .animals-container {
                 transform: scale(0.8);
-                margin: 0.8rem auto 1.8rem; /* 调整移动端底部边距 */
+                margin: 0 auto 1rem;
                 height: 100px;
             }
             
-            .animal-name {
-                font-size: 12px; /* 移动端字体稍小 */
-                bottom: -18px; /* 调整位置 */
+            .bear-arm {
+                width: 35px;
+                top: 35px;
+                left: 70px;
             }
             
-            .poem-quote {
+            .dialogue-bubble {
+                padding: 0.6rem 0.8rem;
                 font-size: 0.9rem;
-                padding: 0.5rem;
-                margin: 1rem 0;
             }
             
-            .dialogue-container {
-                padding: 0.7rem;
-                margin-top: 0.8rem;
-            }
-        }
-        
-        @media screen and (max-width: 375px) { /* iPhone SE/8 宽度 */
-            .container {
-                padding: 0.8rem 0.6rem 0.6rem;
+            .avatar {
+                width: 40px;
+                height: 40px;
             }
             
-            /* 进一步缩小边角装饰 */
-            .container-corner {
-                width: 12px;
-                height: 12px;
-            }
-            
-            h1 {
-                font-size: 1.4rem;
-            }
-            
-            .wish {
-                font-size: 1.2rem;
-            }
-            
-            .calligraphy {
-                font-size: 1.8rem;
-            }
-            
-            .animals-container {
-                transform: scale(0.7);
-                height: 90px;
-                margin-bottom: 1.6rem; /* 稍微减小底部边距 */
-            }
-            
-            .animal-name {
-                bottom: -16px; /* 进一步调整位置 */
-                padding: 1px 4px; /* 减小内边距 */
-            }
-            
-            .dialogue-container {
-                padding: 0.6rem;
+            .quote {
+                font-size: 0.95rem;
+                padding: 0.8rem 1rem;
+                margin: 1.2rem 0;
             }
         }
     </style>
 </head>
 <body>
     <div class="background"></div>
-    <div class="mountain-bg"></div>
-    <div class="ink-decoration"></div>
-    <div class="flowers" id="flowers"></div>
+    <div class="rain" id="rain"></div>
     
     <div class="container">
         <div class="border-decoration"></div>
-        <div class="container-corner corner-top-left"></div>
-        <div class="container-corner corner-top-right"></div>
-        <div class="container-corner corner-bottom-left"></div>
-        <div class="container-corner corner-bottom-right"></div>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzVhN2Q5YSI+PHBhdGggZD0iTTEyIDRjLTQuNDEgMC04IDMuNTktOCA4czMuNTkgOCA4IDggOC0zLjU5IDgtOC0zLjU5LTgtOC04em0wIDEzYy0yLjc2IDAtNS0yLjI0LTUtNXMyLjI0LTUgNS01IDUgMi4yNCA1IDUtMi4yNCA1LTUgNXoiLz48L3N2Zz4=" class="umbrella" alt="雨伞">
         
         <div class="scroll-container">
-            <h1>2025年520 · 爱的祝福</h1>
-            <div class="wish">相守一生，相伴到老</div>
+            <h1>雨天里的温暖安慰</h1>
+            <div class="subtitle">有你在的地方，就是晴天</div>
             
             <div class="animals-container">
                 <div class="panda">
@@ -581,9 +480,8 @@
                     <div class="animal-name">一二</div>
                 </div>
                 
-                <div class="heart"></div>
-                
                 <div class="bear">
+                    <div class="bear-arm"></div>
                     <img src="images/bear.png" alt="布布" class="animal-img">
                     <div class="animal-name">布布</div>
                 </div>
@@ -591,71 +489,58 @@
             
             <!-- 对话框部分 -->
             <div class="dialogue-container">
-                <div class="dialogue-title">一二与布布的微信对话</div>
+                <div class="dialogue-title">雨天的对话</div>
                 
-                <!-- 第一天 -->
+                <!-- 第一部分对话 -->
                 <div class="date-divider">
-                    <span>2024年5月20日 星期一</span>
-                </div>
-                
-                <div class="dialogue left">
-                    <div class="avatar">
-                        <img src="images/bear.png" alt="布布" class="avatar-img">
-                    </div>
-                    <div class="dialogue-bubble">
-                        <div class="dialogue-name">布布</div>
-                        今天正常下班吗？
-                    </div>
+                    <span>2024年6月15日 星期六 雨</span>
                 </div>
                 
                 <div class="dialogue right">
                     <div class="dialogue-bubble">
-                        <div class="dialogue-name">一二</div>
-                        对呀
+                        <div class="mood-indicator">
+                            <span class="mood-icon sad">😔</span> 心情低落
+                        </div>
+                        今天又被领导批评了，感觉自己什么都做不好...
                     </div>
                     <div class="avatar">
                         <img src="images/panda.png" alt="一二" class="avatar-img">
                     </div>
                 </div>
+                <div class="message-time">14:35</div>
                 
                 <div class="dialogue left">
                     <div class="avatar">
                         <img src="images/bear.png" alt="布布" class="avatar-img">
                     </div>
                     <div class="dialogue-bubble">
-                        <div class="dialogue-name">布布</div>
-                        今晚拌个黄瓜 炒个青菜
+                        别这么说，你已经很努力了。领导批评是因为他看重你，相信你能做得更好。
                     </div>
                 </div>
-                
-                <!-- 第二天 -->
-                <div class="date-divider">
-                    <span>2024年5月21日 星期二</span>
-                </div>
-                
-                <div class="dialogue left">
-                    <div class="avatar">
-                        <img src="images/bear.png" alt="布布" class="avatar-img">
-                    </div>
-                    <div class="dialogue-bubble">
-                        <div class="dialogue-name">布布</div>
-                        几点下班？
-                    </div>
-                </div>
+                <div class="message-time">14:38</div>
                 
                 <div class="dialogue right">
                     <div class="dialogue-bubble">
-                        <div class="dialogue-name">一二</div>
-                        接，免得她坐错车
+                        可是同事们似乎都能很轻松地完成任务，只有我一个人总是搞砸...
                     </div>
                     <div class="avatar">
                         <img src="images/panda.png" alt="一二" class="avatar-img">
                     </div>
                 </div>
+                <div class="message-time">14:40</div>
                 
-                <!-- 第三天 -->
-                <div class="date-divider">
-                    <span>2025年5月20日 星期二</span>
+                <!-- 思考中动画 -->
+                <div class="dialogue left">
+                    <div class="avatar">
+                        <img src="images/bear.png" alt="布布" class="avatar-img">
+                    </div>
+                    <div class="dialogue-bubble">
+                        <div class="thinking-dots">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="dialogue left">
@@ -663,150 +548,224 @@
                         <img src="images/bear.png" alt="布布" class="avatar-img">
                     </div>
                     <div class="dialogue-bubble">
-                        <div class="dialogue-name">布布</div>
-                        在吗在吗？
+                        每个人都有自己的节奏，不要把自己和别人比较。你看我们认识这么久了，你有很多优点是别人没有的。记得上次你帮同事解决的那个难题吗？
                     </div>
                 </div>
+                <div class="message-time">14:42</div>
                 
                 <div class="dialogue right">
                     <div class="dialogue-bubble">
-                        <div class="dialogue-name">一二</div>
-                        忙，别闹...
+                        嗯...那只是运气好。外面雨下得好大，我好想回家...
                     </div>
                     <div class="avatar">
                         <img src="images/panda.png" alt="一二" class="avatar-img">
                     </div>
                 </div>
+                <div class="message-time">14:45</div>
+                
+                <div class="dialogue left">
+                    <div class="avatar">
+                        <img src="images/bear.png" alt="布布" class="avatar-img">
+                    </div>
+                    <div class="dialogue-bubble">
+                        别担心，我已经在公司楼下了，带了伞来接你。还给你带了最爱吃的小点心，我们一起回家，好吗？
+                    </div>
+                </div>
+                <div class="message-time">14:47</div>
+                
+                <div class="dialogue right">
+                    <div class="dialogue-bubble">
+                        真的吗？你怎么知道我今天心情不好...
+                    </div>
+                    <div class="avatar">
+                        <img src="images/panda.png" alt="一二" class="avatar-img">
+                    </div>
+                </div>
+                <div class="message-time">14:48</div>
+                
+                <div class="dialogue left">
+                    <div class="avatar">
+                        <img src="images/bear.png" alt="布布" class="avatar-img">
+                    </div>
+                    <div class="dialogue-bubble">
+                        因为下雨天你总是特别敏感，而且早上出门忘带伞了。下班时间到了，快下来吧，我在一楼大厅等你。☔
+                    </div>
+                </div>
+                <div class="message-time">14:50</div>
+                
+                <div class="dialogue right">
+                    <div class="dialogue-bubble">
+                        你真好，我马上下来。❤️
+                    </div>
+                    <div class="avatar">
+                        <img src="images/panda.png" alt="一二" class="avatar-img">
+                    </div>
+                </div>
+                <div class="message-time">14:51</div>
             </div>
             
-            <div class="poem-quote">
-                "善良活泼如一二，安静温和如布布，<br>
-                一段缘分千里牵，两颗心灵共舞步。<br>
-                熊猫棕熊情相依，江南烟雨诉衷肠。"
+            <!-- 添加新的对话场景：忘记吃药 -->
+            <div class="date-divider">
+                <span>2024年6月18日 星期二 多云</span>
             </div>
             
-            <div class="calligraphy">轻煮岁月慢煮茶</div>
-            <div class="teacup"></div>
+            <div class="dialogue right">
+                <div class="dialogue-bubble">
+                    <div class="mood-indicator">
+                        <span class="mood-icon">🎮</span> 打游戏中
+                    </div>
+                    [分享了一个游戏截图]
+                </div>
+                <div class="avatar">
+                    <img src="images/panda.png" alt="一二" class="avatar-img">
+                </div>
+            </div>
+            <div class="message-time">20:35</div>
+            
+            <div class="dialogue left">
+                <div class="avatar">
+                    <img src="images/bear.png" alt="布布" class="avatar-img">
+                </div>
+                <div class="dialogue-bubble">
+                    亲爱的，你今天的药吃了吗？
+                </div>
+            </div>
+            <div class="message-time">20:37</div>
+            
+            <div class="dialogue right">
+                <div class="dialogue-bubble">
+                    啊？没有，忘记了...
+                </div>
+                <div class="avatar">
+                    <img src="images/panda.png" alt="一二" class="avatar-img">
+                </div>
+            </div>
+            <div class="message-time">20:38</div>
+            
+            <div class="dialogue left">
+                <div class="avatar">
+                    <img src="images/bear.png" alt="布布" class="avatar-img">
+                </div>
+                <div class="dialogue-bubble">
+                    赶紧去吃药，别再玩手机啦 😌
+                </div>
+            </div>
+            <div class="message-time">20:39</div>
+            
+            <div class="dialogue right">
+                <div class="dialogue-bubble">
+                    我这就去吃！谢谢你提醒我～
+                </div>
+                <div class="avatar">
+                    <img src="images/panda.png" alt="一二" class="avatar-img">
+                </div>
+            </div>
+            <div class="message-time">20:40</div>
+            
+            <div class="dialogue left">
+                <div class="avatar">
+                    <img src="images/bear.png" alt="布布" class="avatar-img">
+                </div>
+                <div class="dialogue-bubble">
+                    虽然这次忘记吃药没有发病，但不能总是这样，你的健康最重要啊～
+                </div>
+            </div>
+            <div class="message-time">20:42</div>
+            
+            <div class="dialogue right">
+                <div class="dialogue-bubble">
+                    好的布布，你真好，总是这么关心我
+                </div>
+                <div class="avatar">
+                    <img src="images/panda.png" alt="一二" class="avatar-img">
+                </div>
+            </div>
+            <div class="message-time">20:43</div>
+            
+            <div class="dialogue right">
+                <div class="dialogue-bubble">
+                    吃完了！✓ 明天开始我一定记得按时吃
+                </div>
+                <div class="avatar">
+                    <img src="images/panda.png" alt="一二" class="avatar-img">
+                </div>
+            </div>
+            <div class="message-time">20:45</div>
+            
+            <div class="quote">
+                "雨天里的伞，是温暖的陪伴；<br>
+                低谷中的手，是坚定的支持。<br>
+                不论晴天雨天，都会在你身边。"
+            </div>
             
             <footer>
-                <span class="tea-decoration"></span>
-                情满五月 · 爱在2025
-                <span class="tea-decoration"></span>
+                <span class="weather-icon">☂</span>
+                情绪的雨，爱的伞
+                <span class="weather-icon">🌈</span>
             </footer>
         </div>
     </div>
     
     <script>
-        // 创建漂浮的花瓣效果
-        function createPetals() {
-            const flowersContainer = document.getElementById('flowers');
+        // 创建雨滴效果
+        function createRain() {
+            const rainContainer = document.getElementById('rain');
             const containerWidth = window.innerWidth;
-            const containerHeight = window.innerHeight;
             
-            // 创建30个花瓣
-            for (let i = 0; i < 30; i++) {
-                const petal = document.createElement('div');
-                petal.className = 'petal';
+            // 创建100个雨滴
+            for (let i = 0; i < 100; i++) {
+                const raindrop = document.createElement('div');
+                raindrop.className = 'raindrop';
                 
-                // 随机大小
-                const size = Math.random() * 20 + 10;
-                petal.style.width = `${size}px`;
-                petal.style.height = `${size}px`;
+                // 随机大小和位置
+                const height = Math.random() * 30 + 10;
+                raindrop.style.height = `${height}px`;
+                raindrop.style.left = `${Math.random() * containerWidth}px`;
                 
-                // 随机位置
-                petal.style.left = `${Math.random() * containerWidth}px`;
-                petal.style.top = `${Math.random() * containerHeight}px`;
+                // 随机下落速度
+                const duration = Math.random() * 1.5 + 0.5;
+                raindrop.style.animation = `rainAnimation ${duration}s linear infinite`;
+                raindrop.style.animationDelay = `${Math.random() * 2}s`;
                 
-                // 随机颜色
-                const hue = 350 + Math.random() * 40; // 粉红色到浅紫色范围
-                const saturation = 60 + Math.random() * 40;
-                const lightness = 70 + Math.random() * 20;
-                petal.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-                
-                // 随机旋转
-                petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+                // 随机透明度
+                raindrop.style.opacity = Math.random() * 0.3 + 0.2;
                 
                 // 添加到容器
-                flowersContainer.appendChild(petal);
-                
-                // 动画
-                animatePetal(petal, containerWidth, containerHeight);
+                rainContainer.appendChild(raindrop);
             }
-        }
-        
-        // 花瓣动画
-        function animatePetal(petal, maxWidth, maxHeight) {
-            // 初始位置
-            let x = parseFloat(petal.style.left);
-            let y = parseFloat(petal.style.top);
-            
-            // 随机速度
-            const speedX = Math.random() * 0.5 - 0.25;
-            const speedY = Math.random() * 0.5 - 0.1;
-            const rotateSpeed = Math.random() * 0.5 - 0.25;
-            let rotation = Math.random() * 360;
-            
-            function move() {
-                x += speedX;
-                y += speedY;
-                rotation += rotateSpeed;
-                
-                // 边界检查
-                if (x > maxWidth) x = 0;
-                if (x < 0) x = maxWidth;
-                if (y > maxHeight) y = 0;
-                if (y < 0) y = maxHeight;
-                
-                // 应用新位置
-                petal.style.left = `${x}px`;
-                petal.style.top = `${y}px`;
-                petal.style.transform = `rotate(${rotation}deg)`;
-                
-                requestAnimationFrame(move);
-            }
-            
-            move();
         }
         
         // 页面加载完成后执行
         window.addEventListener('load', () => {
-            createPetals();
+            createRain();
             
-            // 文字渐入效果
-            const calligraphy = document.querySelector('.calligraphy');
-            const text = calligraphy.textContent;
-            calligraphy.textContent = '';
-            
-            for (let i = 0; i < text.length; i++) {
-                const span = document.createElement('span');
-                span.textContent = text[i];
-                span.style.opacity = '0';
-                span.style.transition = 'opacity 0.5s ease';
-                span.style.transitionDelay = `${i * 0.2}s`;
-                calligraphy.appendChild(span);
-                
-                setTimeout(() => {
-                    span.style.opacity = '1';
-                }, 100);
-            }
-            
-            // 为对话气泡添加动画效果
+            // 对话气泡动画效果
             const dialogues = document.querySelectorAll('.dialogue');
             dialogues.forEach((dialogue, index) => {
-                dialogue.style.opacity = '0';
-                dialogue.style.transform = 'translateY(20px)';
-                dialogue.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                dialogue.style.transitionDelay = `${index * 0.3}s`;
+                if (!dialogue.querySelector('.thinking-dots')) {
+                    dialogue.style.opacity = '0';
+                    dialogue.style.transform = 'translateY(10px)';
+                    dialogue.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    dialogue.style.transitionDelay = `${index * 0.2}s`;
+                    
+                    setTimeout(() => {
+                        dialogue.style.opacity = '1';
+                        dialogue.style.transform = 'translateY(0)';
+                    }, 300);
+                }
+            });
+            
+            // 熊抱动画效果
+            const bearArm = document.querySelector('.bear-arm');
+            setTimeout(() => {
+                bearArm.style.transition = 'transform 1s ease';
+                bearArm.style.transform = 'rotate(30deg) translateX(-5px)';
                 
                 setTimeout(() => {
-                    dialogue.style.opacity = '1';
-                    dialogue.style.transform = 'translateY(0)';
-                }, 500);
-            });
+                    bearArm.style.transform = 'rotate(20deg)';
+                }, 1000);
+            }, 2000);
         });
     </script>
-    
-    <!-- 引入额外的动画效果 -->
-    <script src="animation.js"></script>
 </body>
 </html>
