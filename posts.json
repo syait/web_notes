@@ -1,26 +1,41 @@
 [
     {
-        "id": "web-notes-update",
-        "title": "【置顶】Web Notes更新日志，持续更新",
-        "date": "2024-07-12",
-        "categories": ["我的作品"],
-        "tags": ["更新日志", "web_notes", "静态博客"],
-        "excerpt": "本页更新日志说明：所有更新日志将集中在本文，持续更新。"
-    },
-    {
         "id": "markdown-guide",
         "title": "Markdown使用指南",
         "date": "2024-07-11",
-        "categories": ["我的作品"],
-        "tags": ["Markdown", "教程"],
-        "excerpt": "Markdown是一种轻量级标记语言，创建于2004年，现在已经成为世界上最流行的标记语言之一。"
+        "categories": [
+            "我的作品"
+        ],
+        "tags": [
+            "Markdown",
+            "教程"
+        ],
+        "excerpt": "Markdown使用指南  Markdown是一种轻量级标记语言，创建于2004年，现在已经成为世界上最流行的标记语言之一。  基础语法  标题  使用#符号表示标题，一级标题使用一个#，二级标题使用两个#，以此类推。   一级标题 二级标题 三级标题   强调  斜体 使用 斜体 粗体 使用 粗体..."
     },
     {
         "id": "hello-world",
         "title": "Hello World",
         "date": "2024-07-10",
-        "categories": ["其他分享"],
-        "tags": ["静态博客", "web_notes"],
-        "excerpt": "这是我的第一篇博客文章，使用Markdown格式编写。"
+        "categories": [
+            "其他分享"
+        ],
+        "tags": [
+            "静态博客",
+            "web_notes"
+        ],
+        "excerpt": "Hello World  这是我的第一篇博客文章，使用Markdown格式编写。  静态博客的好处：  1. 无需数据库，全静态文件 2. 加载速度快 3. 部署简单 4. 安全性高  js // 这是一段示例代码 console.log(\"Hello, Web Notes!\");   希望这个博客..."
+    },
+    {
+        "id": "personal-rss-feeds",
+        "title": "个人收藏的优质RSS FEEDS",
+        "date": "2023-07-15",
+        "categories": [
+            "Rss"
+        ],
+        "tags": [
+            "Rss",
+            "Feeds"
+        ],
+        "excerpt": "个人收藏的优质RSS FEEDS   RSS（Really Simple Syndication）是一种用来发布经常更新内容的格式，允许用户订阅自己感兴趣的内容源。以下是我收集的一些优质RSS Feeds，希望对你有所帮助。  个人博客 * [虹线]（https://1q43.blog/feed） ..."
     }
-] 
+]

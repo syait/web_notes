@@ -122,79 +122,34 @@ tags:
     </footer>
 
     <script>
-        // 内置默认文章数据，以防 posts.json 加载失败
-        const defaultPosts = [
-            {
-                id: 'web-notes-update',
-                title: '【置顶】Web Notes更新日志，持续更新',
-                date: '2024-07-12',
-                categories: ['我的作品'],
-                tags: ['更新日志', 'web_notes', '静态博客'],
-                excerpt: '本页更新日志说明：所有更新日志将集中在本文，持续更新。'
-            },
-            {
-                id: 'markdown-guide',
-                title: 'Markdown使用指南',
-                date: '2024-07-11',
-                categories: ['我的作品'],
-                tags: ['Markdown', '教程'],
-                excerpt: 'Markdown是一种轻量级标记语言，创建于2004年，现在已经成为世界上最流行的标记语言之一。'
-            },
-            {
-                id: 'hello-world',
-                title: 'Hello World',
-                date: '2024-07-10',
-                categories: ['其他分享'],
-                tags: ['静态博客', 'web_notes'],
-                excerpt: '这是我的第一篇博客文章，使用Markdown格式编写。'
-            }
-        ];
-
         document.addEventListener('DOMContentLoaded', function() {
-            // 加载文章数据，更新侧边栏
-            fetch('posts.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('无法加载文章列表');
-                    }
-                    return response.json();
-                })
-                .then(posts => {
-                    // 渲染近期文章
-                    const recentPosts = document.querySelector('.recent-posts');
-                    if (recentPosts) {
-                        let html = '<ul>';
-                        posts.slice(0, 5).forEach(post => {
-                            html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
-                        });
-                        html += '</ul>';
-                        recentPosts.innerHTML = html;
-                    }
-                    
-                    // 渲染分类和标签
-                    renderCategories(posts);
-                    renderTags(posts);
-                })
-                .catch(error => {
-                    console.error('加载文章列表失败:', error);
-                    console.log('使用默认文章数据');
-                    
-                    // 渲染近期文章
-                    const recentPosts = document.querySelector('.recent-posts');
-                    if (recentPosts) {
-                        let html = '<ul>';
-                        defaultPosts.slice(0, 5).forEach(post => {
-                            html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
-                        });
-                        html += '</ul>';
-                        recentPosts.innerHTML = html;
-                    }
-                    
-                    // 渲染分类和标签
-                    renderCategories(defaultPosts);
-                    renderTags(defaultPosts);
-                });
+            // 加载侧边栏数据
+            loadSidebarData();
         });
+        
+        // 加载侧边栏数据
+        async function loadSidebarData() {
+            try {
+                // 加载文章数据
+                const posts = await loadPosts();
+                
+                // 渲染侧边栏
+                renderRecentPosts(posts);
+                renderCategories(posts);
+                renderTags(posts);
+            } catch (error) {
+                console.error('加载侧边栏数据失败:', error);
+                
+                // 如果发生错误，显示错误信息
+                const widgets = document.querySelectorAll('.sidebar .widget');
+                widgets.forEach(widget => {
+                    if (widget.querySelector('.widget-title').textContent !== '链接') {
+                        const content = widget.querySelector('div');
+                        if (content) content.innerHTML = '<p>加载失败</p>';
+                    }
+                });
+            }
+        }
     </script>
     
     <style>

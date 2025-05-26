@@ -84,34 +84,6 @@
     </footer>
 
     <script>
-        // 内置默认文章数据，以防 posts.json 加载失败
-        const defaultPosts = [
-            {
-                id: 'web-notes-update',
-                title: '【置顶】Web Notes更新日志，持续更新',
-                date: '2024-07-12',
-                categories: ['我的作品'],
-                tags: ['更新日志', 'web_notes', '静态博客'],
-                excerpt: '本页更新日志说明：所有更新日志将集中在本文，持续更新。'
-            },
-            {
-                id: 'markdown-guide',
-                title: 'Markdown使用指南',
-                date: '2024-07-11',
-                categories: ['我的作品'],
-                tags: ['Markdown', '教程'],
-                excerpt: 'Markdown是一种轻量级标记语言，创建于2004年，现在已经成为世界上最流行的标记语言之一。'
-            },
-            {
-                id: 'hello-world',
-                title: 'Hello World',
-                date: '2024-07-10',
-                categories: ['其他分享'],
-                tags: ['静态博客', 'web_notes'],
-                excerpt: '这是我的第一篇博客文章，使用Markdown格式编写。'
-            }
-        ];
-
         document.addEventListener('DOMContentLoaded', function() {
             // 获取URL参数
             const urlParams = new URLSearchParams(window.location.search);
@@ -131,119 +103,108 @@
             }
             
             // 加载文章数据
-            fetch('posts.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('无法加载文章列表');
-                    }
-                    return response.json();
-                })
-                .then(posts => {
-                    if (categoryName) {
-                        // 筛选当前分类的文章
-                        const filteredPosts = posts.filter(post => 
-                            post.categories && 
-                            post.categories.includes(categoryName)
-                        );
-                        
-                        if (filteredPosts.length > 0) {
-                            renderPosts(filteredPosts);
-                        } else {
-                            document.querySelector('.post-list').innerHTML = `<p>没有找到分类为"${categoryName}"的文章。</p>`;
-                        }
-                    } else {
-                        // 显示所有分类列表
-                        const categories = {};
-                        posts.forEach(post => {
-                            if (post.categories) {
-                                post.categories.forEach(category => {
-                                    if (!categories[category]) {
-                                        categories[category] = 0;
-                                    }
-                                    categories[category]++;
-                                });
-                            }
-                        });
-                        
-                        let html = '<ul class="categories-all">';
-                        Object.keys(categories).sort().forEach(category => {
-                            html += `<li><a href="category.html?name=${encodeURIComponent(category)}">${category} (${categories[category]})</a></li>`;
-                        });
-                        html += '</ul>';
-                        
-                        document.querySelector('.post-list').innerHTML = html;
-                    }
-                    
-                    // 渲染近期文章
-                    const recentPosts = document.querySelector('.recent-posts');
-                    if (recentPosts) {
-                        let html = '<ul>';
-                        posts.slice(0, 5).forEach(post => {
-                            html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
-                        });
-                        html += '</ul>';
-                        recentPosts.innerHTML = html;
-                    }
-                    
-                    // 渲染分类和标签
-                    renderCategories(posts);
-                    renderTags(posts);
-                })
-                .catch(error => {
-                    console.error('加载文章列表失败:', error);
-                    console.log('使用默认文章数据');
-                    
-                    if (categoryName) {
-                        // 筛选当前分类的文章
-                        const filteredPosts = defaultPosts.filter(post => 
-                            post.categories && 
-                            post.categories.includes(categoryName)
-                        );
-                        
-                        if (filteredPosts.length > 0) {
-                            renderPosts(filteredPosts);
-                        } else {
-                            document.querySelector('.post-list').innerHTML = `<p>没有找到分类为"${categoryName}"的文章。</p>`;
-                        }
-                    } else {
-                        // 显示所有分类列表
-                        const categories = {};
-                        defaultPosts.forEach(post => {
-                            if (post.categories) {
-                                post.categories.forEach(category => {
-                                    if (!categories[category]) {
-                                        categories[category] = 0;
-                                    }
-                                    categories[category]++;
-                                });
-                            }
-                        });
-                        
-                        let html = '<ul class="categories-all">';
-                        Object.keys(categories).sort().forEach(category => {
-                            html += `<li><a href="category.html?name=${encodeURIComponent(category)}">${category} (${categories[category]})</a></li>`;
-                        });
-                        html += '</ul>';
-                        
-                        document.querySelector('.post-list').innerHTML = html;
-                    }
-                    
-                    // 渲染近期文章
-                    const recentPosts = document.querySelector('.recent-posts');
-                    if (recentPosts) {
-                        let html = '<ul>';
-                        defaultPosts.slice(0, 5).forEach(post => {
-                            html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
-                        });
-                        html += '</ul>';
-                        recentPosts.innerHTML = html;
-                    }
-                    
-                    // 渲染分类和标签
-                    renderCategories(defaultPosts);
-                    renderTags(defaultPosts);
-                });
+            loadPostsData();
         });
+        
+        // 加载文章数据
+        async function loadPostsData() {
+            try {
+                // 加载文章列表
+                const posts = await loadPosts();
+                
+                // 处理文章数据
+                processPosts(posts);
+            } catch (error) {
+                console.error('加载文章列表失败:', error);
+                document.querySelector('.post-list').innerHTML = '<p>加载文章失败，请刷新页面重试。</p>';
+            }
+        }
+        
+        // 处理和渲染文章数据
+        function processPosts(posts) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryName = urlParams.get('name');
+            
+            if (categoryName) {
+                // 筛选当前分类的文章
+                const filteredPosts = posts.filter(post => 
+                    post.categories && 
+                    post.categories.includes(categoryName)
+                );
+                
+                if (filteredPosts.length > 0) {
+                    renderPosts(filteredPosts);
+                } else {
+                    document.querySelector('.post-list').innerHTML = `<p>没有找到分类为"${categoryName}"的文章。</p>`;
+                }
+            } else {
+                // 显示所有分类列表
+                const categories = {};
+                posts.forEach(post => {
+                    if (post.categories) {
+                        post.categories.forEach(category => {
+                            if (!categories[category]) {
+                                categories[category] = 0;
+                            }
+                            categories[category]++;
+                        });
+                    }
+                });
+                
+                let html = '<ul class="categories-all">';
+                Object.keys(categories).sort().forEach(category => {
+                    html += `<li><a href="category.html?name=${encodeURIComponent(category)}">${category} (${categories[category]})</a></li>`;
+                });
+                html += '</ul>';
+                
+                document.querySelector('.post-list').innerHTML = html;
+            }
+            
+            // 渲染近期文章
+            renderRecentPosts(posts);
+            
+            // 渲染分类和标签
+            renderCategories(posts);
+            renderTags(posts);
+        }
+
+        // 渲染文章列表函数
+        function renderPosts(posts) {
+            const postList = document.querySelector('.post-list');
+            if (!postList) return;
+            
+            // 按日期排序（最新的在前面）
+            posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // 渲染文章列表
+            let html = '';
+            posts.forEach(post => {
+                html += `
+                    <div class="post-item">
+                        <h2 class="post-title">
+                            <a href="post.html?id=${post.id}">${post.title}</a>
+                        </h2>
+                        <div class="post-meta">
+                            <span class="post-date">${formatDate(post.date)}</span>
+                            <span class="post-category">分类: ${post.categories.join(', ')}</span>
+                        </div>
+                        <div class="post-excerpt">${post.excerpt || '暂无摘要'}</div>
+                        <a href="post.html?id=${post.id}" class="read-more">阅读全文</a>
+                    </div>
+                `;
+            });
+            
+            postList.innerHTML = html;
+        }
+        
+        // 日期格式化函数
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
     </script>
 </body>
 </html> 

@@ -17,23 +17,299 @@ document.addEventListener('DOMContentLoaded', function() {
             nav.classList.remove('active');
         }
     });
+    
+    // 检查是否在本地运行
+    if (window.location.protocol === 'file:') {
+        console.log('检测到本地文件系统模式，将使用fallback数据');
+    }
 });
+
+// 检测是否是本地文件系统模式
+function isLocalFileSystem() {
+    return window.location.protocol === 'file:';
+}
+
+// 本地环境的后备文章数据
+const fallbackPostsData = [
+    {
+        "id": "web-notes-update",
+        "title": "Web Notes更新日志",
+        "date": "2024-07-12",
+        "categories": [
+            "我的作品"
+        ],
+        "tags": [
+            "更新日志",
+            "web_notes",
+            "静态博客"
+        ],
+        "excerpt": "【置顶】Web Notes更新日志，持续更新  本页更新日志说明：所有更新日志将集中在本文，持续更新。"
+    },
+    {
+        "id": "markdown-guide",
+        "title": "Markdown使用指南",
+        "date": "2024-07-11",
+        "categories": [
+            "我的作品"
+        ],
+        "tags": [
+            "Markdown",
+            "教程"
+        ],
+        "excerpt": "Markdown是一种轻量级标记语言，创建于2004年，现在已经成为世界上最流行的标记语言之一。"
+    },
+    {
+        "id": "hello-world",
+        "title": "Hello World",
+        "date": "2024-07-10",
+        "categories": [
+            "其他分享"
+        ],
+        "tags": [
+            "静态博客",
+            "web_notes"
+        ],
+        "excerpt": "这是我的第一篇博客文章，使用Markdown格式编写。"
+    },
+    {
+        "id": "personal-rss",
+        "title": "RSS FEEDS 个人的优质收藏",
+        "date": "2023-07-15",
+        "categories": [
+            "Rss"
+        ],
+        "tags": [
+            "Rss",
+            "Feeds"
+        ],
+        "excerpt": "RSS（Really Simple Syndication）是一种用来发布经常更新内容的格式，允许用户订阅自己感兴趣的内容源。以下是我收集的一些优质RSS Feeds，希望对你有所帮助。"
+    }
+];
+
+// 本地环境文章内容备份
+const fallbackPostsContent = {
+    'hello-world': `---
+title: Hello World
+date: 2024-07-10
+categories: 
+  - 其他分享
+tags:
+  - 静态博客
+  - web_notes
+---
+
+## Hello World
+
+这是我的第一篇博客文章，使用Markdown格式编写。
+
+静态博客的好处：
+
+1. 无需数据库，全静态文件
+2. 加载速度快
+3. 部署简单
+4. 安全性高
+
+\`\`\`js
+// 这是一段示例代码
+console.log("Hello, Web Notes!");
+\`\`\`
+
+希望这个博客系统能够为你带来便利！`,
+    'markdown-guide': `---
+title: Markdown使用指南
+date: 2024-07-11
+categories: 
+  - 我的作品
+tags:
+  - Markdown
+  - 教程
+---
+
+## Markdown使用指南
+
+Markdown是一种轻量级标记语言，创建于2004年，现在已经成为世界上最流行的标记语言之一。
+
+### 基础语法
+
+#### 标题
+
+使用\`#\`符号表示标题，一级标题使用一个\`#\`，二级标题使用两个\`#\`，以此类推。
+
+\`\`\`
+# 一级标题
+## 二级标题
+### 三级标题
+\`\`\`
+
+#### 强调
+
+*斜体* 使用 \`*斜体*\`
+**粗体** 使用 \`**粗体**\`
+***粗斜体*** 使用 \`***粗斜体***\`
+
+#### 列表
+
+无序列表使用星号、加号或减号作为列表项的标记：
+
+\`\`\`
+* 第一项
+* 第二项
+* 第三项
+\`\`\`
+
+有序列表使用数字并加上\`.\`号：
+
+\`\`\`
+1. 第一项
+2. 第二项
+3. 第三项
+\`\`\`
+
+### 高级语法
+
+#### 链接
+
+\`\`\`
+[链接文字](链接地址)
+\`\`\`
+
+#### 图片
+
+\`\`\`
+![替代文字](图片地址)
+\`\`\`
+
+希望这篇指南对你有所帮助！`,
+    'web-notes-update': `---
+title: Web Notes更新日志
+date: 2024-07-12
+categories: 
+  - 我的作品
+tags:
+  - 更新日志
+  - web_notes
+  - 静态博客
+---
+
+## 【置顶】Web Notes更新日志，持续更新
+
+本页更新日志说明：所有更新日志将集中在本文，持续更新。
+
+### 2024-07-12更新日志
+
+1. 创建了基础博客框架
+2. 添加了Markdown解析功能
+3. 支持文章分类和标签功能
+4. 优化了移动端显示效果
+
+### 计划中的功能
+
+- [ ] 搜索功能
+- [ ] 评论系统
+- [ ] 暗黑模式
+- [ ] 文章目录自动生成
+
+感谢使用Web Notes静态博客系统！`,
+    'personal-rss': `---
+title: RSS FEEDS 个人的优质收藏
+date: 2023-07-15
+categories: 
+  - Rss
+tags:
+  - Rss
+  - Feeds
+---
+
+## RSS FEEDS 个人的优质收藏
+
+RSS（Really Simple Syndication）是一种用来发布经常更新内容的格式，允许用户订阅自己感兴趣的内容源。以下是我收集的一些优质RSS Feeds，希望对你有所帮助。
+
+### 1. 科技媒体
+
+* [少数派](https://sspai.com/feed) - 优质数字生活指南
+* [36氪](https://36kr.com/feed) - 中国创业互联网媒体
+* [爱范儿](https://www.ifanr.com/feed) - 关注科技、生活方式的媒体
+
+### 2. 技术类
+
+* [阮一峰的网络日志](http://www.ruanyifeng.com/blog/atom.xml) - 知名技术博主，Web技术介绍
+* [酷壳](https://coolshell.cn/feed) - 陈皓的技术博客，分享技术见解
+* [InfoQ](https://feed.infoq.com) - 软件开发新闻、文章和视频
+* [Hacker News](https://news.ycombinator.com/rss) - 编程和创业领域的热门新闻
+
+### 3. 个人博客
+
+* [月光博客](https://www.williamlong.info/rss.xml) - 关注互联网和搜索引擎的IT博客
+* [张鑫旭的博客](https://www.zhangxinxu.com/wordpress/feed/) - 前端技术博客
+
+### 如何使用RSS
+
+1. 选择一个RSS阅读器，如Feedly、Inoreader或NewsBlur
+2. 将上述RSS链接添加到你的阅读器中
+3. 定期查看更新，获取最新内容
+
+希望这些RSS源能够帮助你获取有价值的信息！`
+};
 
 // 文章列表加载
 async function loadPosts() {
+    console.log('开始加载文章数据...');
+    
+    // 如果是本地文件系统模式，直接使用内置数据
+    if (isLocalFileSystem()) {
+        console.log('本地文件系统模式，使用内置fallback数据');
+        return fallbackPostsData;
+    }
+    
     try {
+        // 尝试从缓存加载文章列表
+        const cachedPosts = localStorage.getItem('webnotes_posts_cache');
+        const cacheTime = localStorage.getItem('webnotes_posts_cache_time');
+        
+        if (cachedPosts && cacheTime) {
+            const posts = JSON.parse(cachedPosts);
+            const cacheAge = (new Date().getTime() - parseInt(cacheTime)) / (1000 * 60); // 缓存时间（分钟）
+            
+            if (cacheAge < 60) { // 缓存不超过60分钟
+                console.log(`使用缓存的文章数据（${cacheAge.toFixed(2)}分钟前）`);
+                return posts;
+            }
+        }
+        
+        console.log('尝试从服务器加载文章数据：posts.json');
         const response = await fetch('posts.json');
+        
         if (!response.ok) {
-            throw new Error('Failed to fetch posts');
+            console.error(`加载文章列表失败: HTTP ${response.status} - ${response.statusText}`);
+            throw new Error(`加载文章列表失败: HTTP ${response.status}`);
         }
 
         const data = await response.json();
-        renderPosts(data);
-        renderCategories(data);
-        renderTags(data);
+        console.log(`成功加载文章数据，共${data.length}篇文章`);
+        
+        // 缓存文章数据到localStorage
+        try {
+            localStorage.setItem('webnotes_posts_cache', JSON.stringify(data));
+            localStorage.setItem('webnotes_posts_cache_time', new Date().getTime());
+            console.log('文章数据已缓存到localStorage');
+        } catch (e) {
+            console.warn('无法缓存文章数据到localStorage:', e);
+        }
+        
+        return data;
     } catch (error) {
         console.error('Error loading posts:', error);
-        document.querySelector('.post-list').innerHTML = '<p>加载文章失败，请稍后再试。</p>';
+        
+        // 如果有缓存，尽管已过期，仍然使用
+        const cachedPosts = localStorage.getItem('webnotes_posts_cache');
+        if (cachedPosts) {
+            console.log('使用过期的缓存数据');
+            return JSON.parse(cachedPosts);
+        }
+        
+        // 如果没有缓存，尝试使用内置数据
+        console.log('使用内置fallback数据作为最后的备选方案');
+        return fallbackPostsData;
     }
 }
 
@@ -128,57 +404,139 @@ function formatDate(dateString) {
     return `${year}-${month}-${day}`;
 }
 
+// 渲染近期文章函数
+function renderRecentPosts(posts) {
+    const recentPosts = document.querySelector('.recent-posts');
+    if (recentPosts) {
+        let html = '<ul>';
+        posts.slice(0, 5).forEach(post => {
+            html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
+        });
+        html += '</ul>';
+        recentPosts.innerHTML = html;
+    }
+}
+
 // 加载单篇文章
-async function loadPost() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const postId = urlParams.get('id');
+async function loadPost(postId) {
+    console.log(`开始加载文章: ${postId}...`);
+    
+    // 如果是本地文件系统模式，直接使用内置数据
+    if (isLocalFileSystem()) {
+        console.log('本地文件系统模式，使用内置文章内容');
+        if (fallbackPostsContent[postId]) {
+            return fallbackPostsContent[postId];
+        } else {
+            console.error(`本地模式下未找到文章: ${postId}`);
+            throw new Error(`本地模式下未找到文章: ${postId}`);
+        }
+    }
 
     if (!postId) {
-        window.location.href = 'index.html';
-        return;
+        console.error('未指定文章ID');
+        throw new Error('未指定文章ID');
     }
 
     try {
+        // 尝试从缓存加载文章内容
+        const cachedContent = localStorage.getItem(`webnotes_post_${postId}`);
+        const cacheTime = localStorage.getItem(`webnotes_post_${postId}_time`);
+        
+        if (cachedContent && cacheTime) {
+            const cacheAge = (new Date().getTime() - parseInt(cacheTime)) / (1000 * 60 * 60); // 小时
+            
+            // 如果缓存不超过24小时，直接使用缓存
+            if (cacheAge < 24) {
+                console.log(`使用缓存的文章内容（${cacheAge.toFixed(2)}小时前）`);
+                return cachedContent;
+            }
+        }
+        
+        console.log(`尝试从服务器加载文章: posts/${postId}.md`);
         const response = await fetch(`posts/${postId}.md`);
+        
         if (!response.ok) {
-            throw new Error('Failed to fetch post');
+            console.error(`加载文章失败: HTTP ${response.status} - ${response.statusText}`);
+            throw new Error(`文章加载失败(HTTP ${response.status})`);
         }
 
         const markdown = await response.text();
+        console.log(`成功加载文章: ${postId}`);
         
-        // 解析 frontmatter
-        const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
-        const frontMatterMatch = markdown.match(frontMatterRegex);
-        
-        let frontMatter = {};
-        let content = markdown;
-        
-        if (frontMatterMatch) {
-            const frontMatterText = frontMatterMatch[1];
-            frontMatterText.split('\n').forEach(line => {
-                if (line.trim() && line.includes(':')) {
-                    const [key, ...valueParts] = line.split(':');
-                    let value = valueParts.join(':').trim();
-                    
-                    // 处理数组类型的值
-                    if (value.startsWith('- ')) {
-                        value = value.substring(2).split(', ');
-                    }
-                    
-                    frontMatter[key.trim()] = value;
-                }
-            });
-            
-            content = markdown.substring(frontMatterMatch[0].length);
+        // 缓存文章内容
+        try {
+            localStorage.setItem(`webnotes_post_${postId}`, markdown);
+            localStorage.setItem(`webnotes_post_${postId}_time`, new Date().getTime());
+            console.log('文章内容已缓存到localStorage');
+        } catch (e) {
+            console.warn('无法缓存文章内容:', e);
         }
         
-        // 渲染文章
-        renderPostContent(frontMatter, content);
-        
+        return markdown;
     } catch (error) {
         console.error('Error loading post:', error);
-        document.querySelector('.post-content').innerHTML = '<p>加载文章失败，请稍后再试。</p>';
+        
+        // 尝试从缓存加载文章内容，即使已过期
+        const cachedContent = localStorage.getItem(`webnotes_post_${postId}`);
+        if (cachedContent) {
+            console.log('使用过期的缓存文章内容');
+            return cachedContent;
+        }
+        
+        // 如果没有缓存，尝试使用内置数据
+        if (fallbackPostsContent[postId]) {
+            console.log(`使用内置文章内容: ${postId}`);
+            return fallbackPostsContent[postId];
+        }
+        
+        throw error;
     }
+}
+
+// 解析 frontmatter
+function parseFrontmatter(content) {
+    const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
+    const frontMatterMatch = content.match(frontMatterRegex);
+    
+    let frontMatter = {};
+    let contentText = content;
+    
+    if (frontMatterMatch) {
+        const frontMatterText = frontMatterMatch[1];
+        const lines = frontMatterText.split('\n');
+        
+        lines.forEach(line => {
+            if (line.trim() && line.includes(':')) {
+                const colonIndex = line.indexOf(':');
+                const key = line.substring(0, colonIndex).trim();
+                let value = line.substring(colonIndex + 1).trim();
+                
+                if (key === 'categories' || key === 'tags') {
+                    // 解析 YAML 风格的数组
+                    const arrayRegex = /\s*-\s+(.+)/g;
+                    const values = [];
+                    let match;
+                    
+                    while ((match = arrayRegex.exec(value)) !== null) {
+                        values.push(match[1]);
+                    }
+                    
+                    if (values.length > 0) {
+                        frontMatter[key] = values;
+                    }
+                } else {
+                    frontMatter[key] = value;
+                }
+            }
+        });
+        
+        contentText = content.substring(frontMatterMatch[0].length);
+    }
+    
+    return {
+        frontMatter,
+        content: contentText
+    };
 }
 
 // 渲染文章内容
@@ -203,16 +561,38 @@ function renderPostContent(frontMatter, markdown) {
                 ? frontMatter.categories 
                 : [frontMatter.categories];
             
-            metaHtml += `<span class="post-category">分类：${categories.join(', ')}</span>`;
+            metaHtml += `<span class="post-category">分类：`;
+            categories.forEach((category, index) => {
+                metaHtml += `<a href="category.html?name=${encodeURIComponent(category)}">${category}</a>`;
+                if (index < categories.length - 1) {
+                    metaHtml += ', ';
+                }
+            });
+            metaHtml += `</span>`;
+        }
+        
+        if (frontMatter.tags && frontMatter.tags.length) {
+            metaHtml += `<span class="post-tags">标签：`;
+            frontMatter.tags.forEach((tag, index) => {
+                metaHtml += `<a href="tag.html?name=${encodeURIComponent(tag)}">${tag}</a>`;
+                if (index < frontMatter.tags.length - 1) {
+                    metaHtml += ', ';
+                }
+            });
+            metaHtml += `</span>`;
         }
         
         postMeta.innerHTML = metaHtml;
     }
     
     if (postContent) {
-        // 这里需要引入一个 Markdown 解析库，例如 marked.js
-        // 为了简化示例，这里使用一个极简的 Markdown 解析函数
-        postContent.innerHTML = simpleMarkdownToHtml(markdown);
+        // 优先使用 marked.js 解析 Markdown
+        if (typeof marked !== 'undefined') {
+            postContent.innerHTML = marked.parse(markdown);
+        } else {
+            // 如果 marked.js 未加载，使用简单解析
+            postContent.innerHTML = simpleMarkdownToHtml(markdown);
+        }
     }
 }
 
