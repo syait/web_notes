@@ -1,0 +1,18 @@
+# 允许访问.md文件
+<FilesMatch "\.md$">
+    Header set Content-Type "text/plain; charset=utf-8"
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
+# 启用CORS跨域
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"
+</IfModule>
+
+# 设置默认编码
+AddDefaultCharset UTF-8
+
+# 防止目录浏览
+Options -Indexes 

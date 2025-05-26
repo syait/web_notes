@@ -452,16 +452,43 @@ async function loadPost(postId) {
             }
         }
         
-        console.log(`尝试从服务器加载文章: posts/${postId}.md`);
-        const response = await fetch(`posts/${postId}.md`);
+        // 构建文章URL
+        const articleUrl = `posts/${postId}.md`;
+        console.log(`尝试从服务器加载文章: ${articleUrl}`);
+        
+        // 添加时间戳参数防止缓存
+        const timestamp = new Date().getTime();
+        const urlWithTimestamp = `${articleUrl}?t=${timestamp}`;
+        
+        // 使用更详细的fetch选项
+        const response = await fetch(urlWithTimestamp, {
+            method: 'GET',
+            headers: {
+                'Accept': 'text/plain, text/markdown, */*',
+                'Cache-Control': 'no-cache'
+            },
+            mode: 'cors',
+            cache: 'no-store'
+        });
         
         if (!response.ok) {
             console.error(`加载文章失败: HTTP ${response.status} - ${response.statusText}`);
-            throw new Error(`文章加载失败(HTTP ${response.status})`);
+            console.error(`文章URL: ${urlWithTimestamp}`);
+            console.error(`响应类型: ${response.type}`);
+            console.error(`响应头: `, Object.fromEntries([...response.headers]));
+            throw new Error(`文章加载失败(HTTP ${response.status}): ${response.statusText}`);
         }
 
         const markdown = await response.text();
-        console.log(`成功加载文章: ${postId}`);
+        console.log(`成功加载文章: ${postId} (${markdown.length} 字节)`);
+        
+        if (markdown.trim().length === 0) {
+            throw new Error(`文章内容为空: ${postId}`);
+        }
+        
+        if (!markdown.includes('---')) {
+            console.warn(`警告: 文章可能缺少frontmatter: ${postId}`);
+        }
         
         // 缓存文章内容
         try {
@@ -474,7 +501,7 @@ async function loadPost(postId) {
         
         return markdown;
     } catch (error) {
-        console.error('Error loading post:', error);
+        console.error(`加载文章 ${postId} 时出错:`, error);
         
         // 尝试从缓存加载文章内容，即使已过期
         const cachedContent = localStorage.getItem(`webnotes_post_${postId}`);
@@ -488,8 +515,17 @@ async function loadPost(postId) {
             console.log(`使用内置文章内容: ${postId}`);
             return fallbackPostsContent[postId];
         }
+
+        // 添加服务器环境检测的错误信息
+        const errorDetails = `
+            尝试访问: posts/${postId}.md
+            当前URL: ${window.location.href}
+            协议: ${window.location.protocol}
+            主机: ${window.location.host}
+        `;
+        console.error(errorDetails);
         
-        throw error;
+        throw new Error(`无法加载文章(${error.message}). 请确保服务器配置正确且文件存在`);
     }
 }
 
