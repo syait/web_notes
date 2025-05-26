@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>文章 - Web Notes</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="index.html">Web Notes</a>
+            </div>
+            <div class="menu-toggle">&#9776;</div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="category.html">分类</a></li>
+                    <li><a href="tag.html">标签</a></li>
+                    <li><a href="about.html">关于</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- 主要内容 -->
+    <div class="container main">
+        <!-- 文章内容 -->
+        <div class="content">
+            <article class="post">
+                <h1 class="post-title">加载中...</h1>
+                <div class="post-meta">
+                    <!-- 文章元信息会通过JavaScript动态加载 -->
+                </div>
+                <div class="post-content">
+                    <!-- 文章内容会通过JavaScript动态加载 -->
+                    <p>加载中...</p>
+                </div>
+            </article>
+        </div>
+        
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <!-- 近期文章 -->
+            <div class="widget">
+                <h3 class="widget-title">近期文章</h3>
+                <div class="recent-posts">
+                    <!-- 近期文章列表会通过JavaScript动态加载 -->
+                </div>
+            </div>
+            
+            <!-- 分类目录 -->
+            <div class="widget">
+                <h3 class="widget-title">分类目录</h3>
+                <div class="categories-list">
+                    <!-- 分类列表会通过JavaScript动态加载 -->
+                </div>
+            </div>
+            
+            <!-- 标签云 -->
+            <div class="widget">
+                <h3 class="widget-title">标签</h3>
+                <div class="tag-cloud">
+                    <!-- 标签云会通过JavaScript动态加载 -->
+                </div>
+            </div>
+            
+            <!-- 链接 -->
+            <div class="widget">
+                <h3 class="widget-title">链接</h3>
+                <ul>
+                    <li><a href="https://github.com/">GitHub</a></li>
+                    <li><a href="sitemap.html">网站地图</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>Powered by Web Notes &copy; 2024</p>
+        </div>
+    </footer>
+
+    <script>
+        // 内置默认文章数据，以防 posts.json 加载失败
+        const defaultPosts = [
+            {
+                id: 'web-notes-update',
+                title: '【置顶】Web Notes更新日志，持续更新',
+                date: '2024-07-12',
+                categories: ['我的作品'],
+                tags: ['更新日志', 'web_notes', '静态博客'],
+                excerpt: '本页更新日志说明：所有更新日志将集中在本文，持续更新。'
+            },
+            {
+                id: 'markdown-guide',
+                title: 'Markdown使用指南',
+                date: '2024-07-11',
+                categories: ['我的作品'],
+                tags: ['Markdown', '教程'],
+                excerpt: 'Markdown是一种轻量级标记语言，创建于2004年，现在已经成为世界上最流行的标记语言之一。'
+            },
+            {
+                id: 'hello-world',
+                title: 'Hello World',
+                date: '2024-07-10',
+                categories: ['其他分享'],
+                tags: ['静态博客', 'web_notes'],
+                excerpt: '这是我的第一篇博客文章，使用Markdown格式编写。'
+            }
+        ];
+
+        // 内置默认文章内容，以防无法加载 Markdown 文件
+        const defaultMarkdownContent = {
+            'hello-world': `---
+title: Hello World
+date: 2024-07-10
+categories: 
+  - 其他分享
+tags:
+  - 静态博客
+  - web_notes
+---
+
+## Hello World
+
+这是我的第一篇博客文章，使用Markdown格式编写。
+
+静态博客的好处：
+
+1. 无需数据库，全静态文件
+2. 加载速度快
+3. 部署简单
+4. 安全性高
+
+\`\`\`js
+// 这是一段示例代码
+console.log("Hello, Web Notes!");
+\`\`\`
+
+希望这个博客系统能够为你带来便利！`,
+            'markdown-guide': `---
+title: Markdown使用指南
+date: 2024-07-11
+categories: 
+  - 我的作品
+tags:
+  - Markdown
+  - 教程
+---
+
+## Markdown使用指南
+
+Markdown是一种轻量级标记语言，创建于2004年，现在已经成为世界上最流行的标记语言之一。
+
+### 基础语法
+
+#### 标题
+
+使用\`#\`符号表示标题，一级标题使用一个\`#\`，二级标题使用两个\`#\`，以此类推。
+
+\`\`\`
+# 一级标题
+## 二级标题
+### 三级标题
+\`\`\`
+
+#### 强调
+
+*斜体* 使用 \`*斜体*\`
+**粗体** 使用 \`**粗体**\`
+***粗斜体*** 使用 \`***粗斜体***\`
+
+#### 列表
+
+无序列表使用星号、加号或减号作为列表项的标记：
+
+\`\`\`
+* 第一项
+* 第二项
+* 第三项
+\`\`\`
+
+有序列表使用数字并加上\`.\`号：
+
+\`\`\`
+1. 第一项
+2. 第二项
+3. 第三项
+\`\`\`
+
+### 高级语法
+
+#### 链接
+
+\`\`\`
+[链接文字](链接地址)
+\`\`\`
+
+#### 图片
+
+\`\`\`
+![替代文字](图片地址)
+\`\`\`
+
+希望这篇指南对你有所帮助！`,
+            'web-notes-update': `---
+title: Web Notes更新日志
+date: 2024-07-12
+categories: 
+  - 我的作品
+tags:
+  - 更新日志
+  - web_notes
+  - 静态博客
+---
+
+## 【置顶】Web Notes更新日志，持续更新
+
+本页更新日志说明：所有更新日志将集中在本文，持续更新。
+
+### 2024-07-12更新日志
+
+1. 创建了基础博客框架
+2. 添加了Markdown解析功能
+3. 支持文章分类和标签功能
+4. 优化了移动端显示效果
+
+### 计划中的功能
+
+- [ ] 搜索功能
+- [ ] 评论系统
+- [ ] 暗黑模式
+- [ ] 文章目录自动生成
+
+感谢使用Web Notes静态博客系统！`
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取URL参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            
+            if (!postId) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // 尝试使用默认内容
+            if (defaultMarkdownContent[postId]) {
+                processMdContent(defaultMarkdownContent[postId]);
+                
+                // 渲染侧边栏
+                renderRecentPosts(defaultPosts);
+                renderCategories(defaultPosts);
+                renderTags(defaultPosts);
+            } else {
+                // 如果没有默认内容，尝试从文件加载
+                fetch(`posts/${postId}.md`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`文章加载失败(${response.status})`);
+                        }
+                        return response.text();
+                    })
+                    .then(markdown => {
+                        // 解析 frontmatter
+                        processMdContent(markdown);
+                    })
+                    .catch(error => {
+                        console.error('加载文章失败:', error);
+                        document.querySelector('.post-title').textContent = '文章加载失败';
+                        document.querySelector('.post-content').innerHTML = `<p>无法加载文章：${error.message}</p><p>请确认文章文件 ${postId}.md 存在于 posts 目录中。</p>`;
+                    });
+                
+                // 加载侧边栏数据
+                fetch('posts.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('无法加载文章列表');
+                        }
+                        return response.json();
+                    })
+                    .then(posts => {
+                        renderRecentPosts(posts);
+                        renderCategories(posts);
+                        renderTags(posts);
+                    })
+                    .catch(error => {
+                        console.error('加载文章列表失败:', error);
+                        console.log('使用默认文章数据');
+                        
+                        // 使用默认数据
+                        renderRecentPosts(defaultPosts);
+                        renderCategories(defaultPosts);
+                        renderTags(defaultPosts);
+                    });
+            }
+        });
+        
+        // 日期格式化函数
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // 渲染近期文章函数
+        function renderRecentPosts(posts) {
+            const recentPosts = document.querySelector('.recent-posts');
+            if (recentPosts) {
+                let html = '<ul>';
+                posts.slice(0, 5).forEach(post => {
+                    html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
+                });
+                html += '</ul>';
+                recentPosts.innerHTML = html;
+            }
+        }
+
+        // 处理Markdown内容的函数
+        function processMdContent(markdown) {
+            // 解析 frontmatter
+            const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
+            const frontMatterMatch = markdown.match(frontMatterRegex);
+            
+            let frontMatter = {};
+            let content = markdown;
+            
+            if (frontMatterMatch) {
+                const frontMatterText = frontMatterMatch[1];
+                const lines = frontMatterText.split('\n');
+                
+                lines.forEach(line => {
+                    if (line.trim() && line.includes(':')) {
+                        const colonIndex = line.indexOf(':');
+                        const key = line.substring(0, colonIndex).trim();
+                        let value = line.substring(colonIndex + 1).trim();
+                        
+                        if (key === 'categories' || key === 'tags') {
+                            // 解析 YAML 风格的数组
+                            const arrayRegex = /\s*-\s+(.+)/g;
+                            const values = [];
+                            let match;
+                            
+                            while ((match = arrayRegex.exec(value)) !== null) {
+                                values.push(match[1]);
+                            }
+                            
+                            if (values.length > 0) {
+                                frontMatter[key] = values;
+                            }
+                        } else {
+                            frontMatter[key] = value;
+                        }
+                    }
+                });
+                
+                content = markdown.substring(frontMatterMatch[0].length);
+                
+                // 更新页面标题
+                document.title = `${frontMatter.title || '未命名文章'} - Web Notes`;
+                
+                // 更新文章标题
+                document.querySelector('.post-title').textContent = frontMatter.title || '未命名文章';
+                
+                // 更新文章元信息
+                let metaHtml = '';
+                
+                if (frontMatter.date) {
+                    metaHtml += `<span class="post-date">发布时间：${formatDate(frontMatter.date)}</span>`;
+                }
+                
+                if (frontMatter.categories && frontMatter.categories.length) {
+                    metaHtml += `<span class="post-category">分类：`;
+                    frontMatter.categories.forEach((category, index) => {
+                        metaHtml += `<a href="category.html?name=${encodeURIComponent(category)}">${category}</a>`;
+                        if (index < frontMatter.categories.length - 1) {
+                            metaHtml += ', ';
+                        }
+                    });
+                    metaHtml += `</span>`;
+                }
+                
+                if (frontMatter.tags && frontMatter.tags.length) {
+                    metaHtml += `<span class="post-tags">标签：`;
+                    frontMatter.tags.forEach((tag, index) => {
+                        metaHtml += `<a href="tag.html?name=${encodeURIComponent(tag)}">${tag}</a>`;
+                        if (index < frontMatter.tags.length - 1) {
+                            metaHtml += ', ';
+                        }
+                    });
+                    metaHtml += `</span>`;
+                }
+                
+                document.querySelector('.post-meta').innerHTML = metaHtml;
+            }
+            
+            // 渲染文章内容
+            // 使用 marked.js 解析 Markdown
+            if (typeof marked !== 'undefined') {
+                document.querySelector('.post-content').innerHTML = marked.parse(content);
+            } else {
+                // 如果 marked.js 未加载，使用简单解析
+                document.querySelector('.post-content').innerHTML = simpleMarkdownToHtml(content);
+            }
+        }
+    </script>
+</body>
+</html> 

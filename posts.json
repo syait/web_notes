@@ -1,0 +1,26 @@
+[
+    {
+        "id": "web-notes-update",
+        "title": "【置顶】Web Notes更新日志，持续更新",
+        "date": "2024-07-12",
+        "categories": ["我的作品"],
+        "tags": ["更新日志", "web_notes", "静态博客"],
+        "excerpt": "本页更新日志说明：所有更新日志将集中在本文，持续更新。"
+    },
+    {
+        "id": "markdown-guide",
+        "title": "Markdown使用指南",
+        "date": "2024-07-11",
+        "categories": ["我的作品"],
+        "tags": ["Markdown", "教程"],
+        "excerpt": "Markdown是一种轻量级标记语言，创建于2004年，现在已经成为世界上最流行的标记语言之一。"
+    },
+    {
+        "id": "hello-world",
+        "title": "Hello World",
+        "date": "2024-07-10",
+        "categories": ["其他分享"],
+        "tags": ["静态博客", "web_notes"],
+        "excerpt": "这是我的第一篇博客文章，使用Markdown格式编写。"
+    }
+] 

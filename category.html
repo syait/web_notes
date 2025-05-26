@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>分类 - Web Notes</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="index.html">Web Notes</a>
+            </div>
+            <div class="menu-toggle">&#9776;</div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="category.html">分类</a></li>
+                    <li><a href="tag.html">标签</a></li>
+                    <li><a href="about.html">关于</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- 主要内容 -->
+    <div class="container main">
+        <!-- 文章列表 -->
+        <div class="content">
+            <h1 id="category-title">分类</h1>
+            <div id="category-description"></div>
+            <div class="post-list">
+                <!-- 文章列表会通过JavaScript动态加载 -->
+                <div class="loading">加载中...</div>
+            </div>
+        </div>
+        
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <!-- 近期文章 -->
+            <div class="widget">
+                <h3 class="widget-title">近期文章</h3>
+                <div class="recent-posts">
+                    <!-- 近期文章列表会通过JavaScript动态加载 -->
+                </div>
+            </div>
+            
+            <!-- 分类目录 -->
+            <div class="widget">
+                <h3 class="widget-title">分类目录</h3>
+                <div class="categories-list">
+                    <!-- 分类列表会通过JavaScript动态加载 -->
+                </div>
+            </div>
+            
+            <!-- 标签云 -->
+            <div class="widget">
+                <h3 class="widget-title">标签</h3>
+                <div class="tag-cloud">
+                    <!-- 标签云会通过JavaScript动态加载 -->
+                </div>
+            </div>
+            
+            <!-- 链接 -->
+            <div class="widget">
+                <h3 class="widget-title">链接</h3>
+                <ul>
+                    <li><a href="https://github.com/">GitHub</a></li>
+                    <li><a href="sitemap.html">网站地图</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>Powered by Web Notes &copy; 2024</p>
+        </div>
+    </footer>
+
+    <script>
+        // 内置默认文章数据，以防 posts.json 加载失败
+        const defaultPosts = [
+            {
+                id: 'web-notes-update',
+                title: '【置顶】Web Notes更新日志，持续更新',
+                date: '2024-07-12',
+                categories: ['我的作品'],
+                tags: ['更新日志', 'web_notes', '静态博客'],
+                excerpt: '本页更新日志说明：所有更新日志将集中在本文，持续更新。'
+            },
+            {
+                id: 'markdown-guide',
+                title: 'Markdown使用指南',
+                date: '2024-07-11',
+                categories: ['我的作品'],
+                tags: ['Markdown', '教程'],
+                excerpt: 'Markdown是一种轻量级标记语言，创建于2004年，现在已经成为世界上最流行的标记语言之一。'
+            },
+            {
+                id: 'hello-world',
+                title: 'Hello World',
+                date: '2024-07-10',
+                categories: ['其他分享'],
+                tags: ['静态博客', 'web_notes'],
+                excerpt: '这是我的第一篇博客文章，使用Markdown格式编写。'
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取URL参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryName = urlParams.get('name');
+            
+            // 更新页面标题
+            const categoryTitle = document.getElementById('category-title');
+            if (categoryName) {
+                categoryTitle.textContent = `分类：${categoryName}`;
+                document.title = `${categoryName} - 分类 - Web Notes`;
+            } else {
+                categoryTitle.textContent = '所有分类';
+                
+                // 如果没有指定分类，显示所有分类列表
+                const categoryDescription = document.getElementById('category-description');
+                categoryDescription.innerHTML = '<p>请从下面选择一个分类：</p>';
+            }
+            
+            // 加载文章数据
+            fetch('posts.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('无法加载文章列表');
+                    }
+                    return response.json();
+                })
+                .then(posts => {
+                    if (categoryName) {
+                        // 筛选当前分类的文章
+                        const filteredPosts = posts.filter(post => 
+                            post.categories && 
+                            post.categories.includes(categoryName)
+                        );
+                        
+                        if (filteredPosts.length > 0) {
+                            renderPosts(filteredPosts);
+                        } else {
+                            document.querySelector('.post-list').innerHTML = `<p>没有找到分类为"${categoryName}"的文章。</p>`;
+                        }
+                    } else {
+                        // 显示所有分类列表
+                        const categories = {};
+                        posts.forEach(post => {
+                            if (post.categories) {
+                                post.categories.forEach(category => {
+                                    if (!categories[category]) {
+                                        categories[category] = 0;
+                                    }
+                                    categories[category]++;
+                                });
+                            }
+                        });
+                        
+                        let html = '<ul class="categories-all">';
+                        Object.keys(categories).sort().forEach(category => {
+                            html += `<li><a href="category.html?name=${encodeURIComponent(category)}">${category} (${categories[category]})</a></li>`;
+                        });
+                        html += '</ul>';
+                        
+                        document.querySelector('.post-list').innerHTML = html;
+                    }
+                    
+                    // 渲染近期文章
+                    const recentPosts = document.querySelector('.recent-posts');
+                    if (recentPosts) {
+                        let html = '<ul>';
+                        posts.slice(0, 5).forEach(post => {
+                            html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
+                        });
+                        html += '</ul>';
+                        recentPosts.innerHTML = html;
+                    }
+                    
+                    // 渲染分类和标签
+                    renderCategories(posts);
+                    renderTags(posts);
+                })
+                .catch(error => {
+                    console.error('加载文章列表失败:', error);
+                    console.log('使用默认文章数据');
+                    
+                    if (categoryName) {
+                        // 筛选当前分类的文章
+                        const filteredPosts = defaultPosts.filter(post => 
+                            post.categories && 
+                            post.categories.includes(categoryName)
+                        );
+                        
+                        if (filteredPosts.length > 0) {
+                            renderPosts(filteredPosts);
+                        } else {
+                            document.querySelector('.post-list').innerHTML = `<p>没有找到分类为"${categoryName}"的文章。</p>`;
+                        }
+                    } else {
+                        // 显示所有分类列表
+                        const categories = {};
+                        defaultPosts.forEach(post => {
+                            if (post.categories) {
+                                post.categories.forEach(category => {
+                                    if (!categories[category]) {
+                                        categories[category] = 0;
+                                    }
+                                    categories[category]++;
+                                });
+                            }
+                        });
+                        
+                        let html = '<ul class="categories-all">';
+                        Object.keys(categories).sort().forEach(category => {
+                            html += `<li><a href="category.html?name=${encodeURIComponent(category)}">${category} (${categories[category]})</a></li>`;
+                        });
+                        html += '</ul>';
+                        
+                        document.querySelector('.post-list').innerHTML = html;
+                    }
+                    
+                    // 渲染近期文章
+                    const recentPosts = document.querySelector('.recent-posts');
+                    if (recentPosts) {
+                        let html = '<ul>';
+                        defaultPosts.slice(0, 5).forEach(post => {
+                            html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
+                        });
+                        html += '</ul>';
+                        recentPosts.innerHTML = html;
+                    }
+                    
+                    // 渲染分类和标签
+                    renderCategories(defaultPosts);
+                    renderTags(defaultPosts);
+                });
+        });
+    </script>
+</body>
+</html> 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Web Notes - 静态博客</title>
+    <title>关于 - Web Notes</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/main.js"></script>
@@ -29,12 +29,52 @@
     
     <!-- 主要内容 -->
     <div class="container main">
-        <!-- 文章列表 -->
+        <!-- 页面内容 -->
         <div class="content">
-            <div class="post-list">
-                <!-- 文章列表会通过JavaScript动态加载 -->
-                <div class="loading">加载中...</div>
-            </div>
+            <article class="page">
+                <h1 class="page-title">关于 Web Notes</h1>
+                <div class="page-content">
+                    <p>Web Notes 是一个简单的静态博客系统，使用纯 HTML、CSS 和 JavaScript 实现，不需要服务器端语言或数据库支持。博客文章使用 Markdown 格式编写，存储在 <code>posts</code> 目录中。</p>
+                    
+                    <h2>特点</h2>
+                    <ul>
+                        <li>纯静态网站，无需服务器端语言</li>
+                        <li>文章使用 Markdown 格式</li>
+                        <li>支持文章分类和标签</li>
+                        <li>响应式设计，适配移动设备</li>
+                        <li>简洁美观的界面</li>
+                    </ul>
+                    
+                    <h2>使用方法</h2>
+                    <ol>
+                        <li>克隆或下载本项目</li>
+                        <li>在 <code>posts</code> 目录下添加 Markdown 格式的文章</li>
+                        <li>更新 <code>posts.json</code> 文件，添加新文章的元数据</li>
+                        <li>使用任何静态文件服务器（例如 GitHub Pages、Netlify、Vercel 等）部署网站</li>
+                    </ol>
+                    
+                    <h2>编写文章</h2>
+                    <p>每篇文章需要包含 YAML 格式的 frontmatter 头部，例如：</p>
+                    <pre><code>---
+title: 文章标题
+date: 2024-07-10
+categories: 
+  - 分类名称
+tags:
+  - 标签1
+  - 标签2
+---
+
+正文内容...</code></pre>
+                    
+                    <h2>联系我们</h2>
+                    <p>如有任何问题或建议，请通过以下方式联系我们：</p>
+                    <ul>
+                        <li>电子邮件: example@example.com</li>
+                        <li>GitHub: <a href="https://github.com/yourusername/web-notes" target="_blank">https://github.com/yourusername/web-notes</a></li>
+                    </ul>
+                </div>
+            </article>
         </div>
         
         <!-- 侧边栏 -->
@@ -111,7 +151,7 @@
         ];
 
         document.addEventListener('DOMContentLoaded', function() {
-            // 尝试加载文章数据
+            // 加载文章数据，更新侧边栏
             fetch('posts.json')
                 .then(response => {
                     if (!response.ok) {
@@ -120,11 +160,16 @@
                     return response.json();
                 })
                 .then(posts => {
-                    // 渲染文章列表
-                    renderPosts(posts);
-                    
                     // 渲染近期文章
-                    renderRecentPosts(posts);
+                    const recentPosts = document.querySelector('.recent-posts');
+                    if (recentPosts) {
+                        let html = '<ul>';
+                        posts.slice(0, 5).forEach(post => {
+                            html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
+                        });
+                        html += '</ul>';
+                        recentPosts.innerHTML = html;
+                    }
                     
                     // 渲染分类和标签
                     renderCategories(posts);
@@ -134,26 +179,60 @@
                     console.error('加载文章列表失败:', error);
                     console.log('使用默认文章数据');
                     
-                    // 使用默认数据
-                    renderPosts(defaultPosts);
-                    renderRecentPosts(defaultPosts);
+                    // 渲染近期文章
+                    const recentPosts = document.querySelector('.recent-posts');
+                    if (recentPosts) {
+                        let html = '<ul>';
+                        defaultPosts.slice(0, 5).forEach(post => {
+                            html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
+                        });
+                        html += '</ul>';
+                        recentPosts.innerHTML = html;
+                    }
+                    
+                    // 渲染分类和标签
                     renderCategories(defaultPosts);
                     renderTags(defaultPosts);
                 });
         });
-        
-        // 渲染近期文章函数
-        function renderRecentPosts(posts) {
-            const recentPosts = document.querySelector('.recent-posts');
-            if (recentPosts) {
-                let html = '<ul>';
-                posts.slice(0, 5).forEach(post => {
-                    html += `<li><a href="post.html?id=${post.id}">${post.title}</a></li>`;
-                });
-                html += '</ul>';
-                recentPosts.innerHTML = html;
-            }
-        }
     </script>
+    
+    <style>
+        .page-content {
+            line-height: 1.8;
+        }
+        
+        .page-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 0.5rem;
+        }
+        
+        .page-content ul, .page-content ol {
+            margin-bottom: 1.5rem;
+        }
+        
+        .page-content code {
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        }
+        
+        .page-content pre {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .page-content pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+    </style>
 </body>
 </html> 
